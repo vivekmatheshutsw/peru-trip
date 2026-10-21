@@ -1,6 +1,8 @@
-# No build step: Netlify publishes the files in this folder as they are.
+# Netlify runs build.js, which encrypts the trip with the TRIP_PASSWORD
+# environment variable (set in Netlify, never stored here) and writes dist/.
 [build]
-  publish = "."
+  command = "node build.js"
+  publish = "dist"
 
 # Always check for a fresh offline worker so phones get updates quickly.
 [[headers]]

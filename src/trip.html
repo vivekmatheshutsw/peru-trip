@@ -387,6 +387,7 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
       <div class="tip"><h3>Day 4 food</h3><p>Lunch on the last day isn't included. Plan to eat in Aguas Calientes before the train.</p></div>
     </div>
     <div class="phrases" id="phrases"></div>
+    <p style="margin-top:22px"><button class="btn" id="lockApp" type="button">Lock app on this device</button> <span style="color:var(--muted);font-size:13px">Forgets the password here. You'll need it again to open the app.</span></p>
     <span class="foot">Sources: Alpaca Expeditions Inca Trail 4D/3N itinerary pages; Peru entry guides for U.S. travelers (2026). Confirm details with your Alpaca briefing and tickets.</span>
   </section>
 </div>
@@ -572,9 +573,11 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
 })();
 </script>
 
+<script>
+document.getElementById('lockApp')?.addEventListener('click',()=>{try{localStorage.removeItem('peru.key')}catch(e){}location.reload()});
+</script>
 <div class="offline-pill" id="netPill" hidden>Offline · showing saved copy</div>
 <script>
-if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}
 (function(){const p=document.getElementById('netPill');const u=()=>{p.hidden=navigator.onLine};addEventListener('online',u);addEventListener('offline',u);u();})();
 </script>
 <style>.offline-pill{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--moss);color:var(--surface);padding:6px 14px;border-radius:999px;font-size:13px;font-weight:600;z-index:15}</style>
