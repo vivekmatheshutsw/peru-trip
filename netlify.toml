@@ -1,0 +1,9 @@
+# No build step: Netlify publishes the files in this folder as they are.
+[build]
+  publish = "."
+
+# Always check for a fresh offline worker so phones get updates quickly.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
