@@ -252,6 +252,7 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
       <div class="cd"><b id="cd-s">--</b><span>sec</span></div>
       <div class="cd-label" id="cd-label">until wheels up at DFW</div>
     </div>
+    <div><button class="btn primary" id="shareApp" type="button">Share this app</button></div>
   </header>
 
   <nav class="tabs" aria-label="Trip sections">
@@ -553,6 +554,20 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
   $('#phrases').innerHTML=ph.map(([e,n])=>`<div class="ph"><span class="es">${e}</span><span class="en">${n}</span><button class="copy" data-t="${e}">Copy</button></div>`).join('');
   $('#phrases').addEventListener('click',e=>{const b=e.target.closest('.copy');if(!b)return;
     navigator.clipboard?.writeText(b.dataset.t).then(()=>toast('Copied'),()=>toast('Copy blocked; select the text instead')) ?? toast('Select the text to copy')});
+})();
+</script>
+
+<script>
+(function(){
+  const b=document.getElementById('shareApp'); if(!b) return;
+  const url=location.origin+location.pathname.replace(/index\.html$/,'');
+  const t=document.getElementById('toast');
+  const say=m=>{t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)};
+  b.addEventListener('click',async()=>{
+    const data={title:'Peru Trip',text:'Our Peru trip app (Nov 15\u201321). Open it, then Share \u2192 Add to Home Screen to install.',url};
+    if(navigator.share){try{await navigator.share(data);return}catch(e){if(e&&e.name==='AbortError')return}}
+    try{await navigator.clipboard.writeText(url);say('Link copied. Paste it in a text.')}catch(e){say(url)}
+  });
 })();
 </script>
 
