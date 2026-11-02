@@ -99,6 +99,45 @@ button{font:inherit;color:inherit}
 .alert b{display:block;margin-bottom:2px}
 .alert p{margin:0;color:var(--muted);font-size:14.5px}
 
+/* Booking */
+.booking{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:24px;display:grid;gap:16px}
+.booking-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.booking-head h3{font-size:22px}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:6px;position:relative}
+.step{display:grid;justify-items:center;text-align:center;gap:6px;position:relative}
+.step::before{content:"";position:absolute;top:15px;left:-50%;width:100%;height:3px;background:var(--line);z-index:0}
+.step:first-child::before{display:none}
+.step.done::before{background:var(--moss)}
+.step button{width:32px;height:32px;border-radius:50%;border:2px solid var(--line);background:var(--surface);cursor:pointer;position:relative;z-index:1;display:grid;place-items:center;transition:background .2s,border-color .2s,transform .15s}
+.step button:active{transform:scale(.9)}
+.step.done button{background:var(--moss);border-color:var(--moss)}
+.step.done button::after{content:"";width:6px;height:12px;border:solid var(--surface);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px);animation:pop .25s ease}
+.step.next button{border-color:var(--accent);animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 45%,transparent)}50%{box-shadow:0 0 0 7px transparent}}
+.step span{font-size:12.5px;line-height:1.3;color:var(--muted)}
+.step.done span{color:var(--ink)}
+.bk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 18px}
+.bk-grid > div{border-top:1px solid var(--line);padding-top:8px;min-width:0}
+.bk-grid .k{font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.bk-grid .v{font-size:15px;overflow-wrap:anywhere}
+.mini{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:2px 10px;font-size:12px;cursor:pointer;margin-left:6px;vertical-align:1px}
+@media (max-width:560px){.step span{font-size:11px}}
+
+/* Stays */
+.stays{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-bottom:24px}
+.stay{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;min-width:0}
+.stay h3{font-size:19px;line-height:1.2}
+.stay .who{font-size:13px;color:var(--muted)}
+.inout{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;background:var(--bg);border-radius:10px;padding:10px 12px}
+.inout .k{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.inout b{display:block;font-family:var(--f-mono);font-size:15px;font-variant-numeric:tabular-nums}
+.inout span{font-size:12.5px;color:var(--muted)}
+.inout .r{text-align:right}
+.inout .arrow{color:var(--muted)}
+.stay ul{margin:0;padding-left:18px;font-size:14px}
+.stay li{margin-bottom:3px}
+.stay .flag{font-size:13px;color:var(--accent);font-weight:600}
+
 /* Spine */
 .spine{list-style:none;margin:0;padding:0;position:relative}
 .spine::before{content:"";position:absolute;left:19px;top:8px;bottom:8px;width:2px;background:var(--line)}
@@ -271,17 +310,65 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
   <!-- OVERVIEW -->
   <section class="panel" id="overview" role="tabpanel">
     <h2>At a glance</h2>
-    <p class="lede">The trip in four numbers, plus the three things most likely to trip you up.</p>
+    <p class="lede">The trip in four numbers, plus what to sort out before you go.</p>
     <div class="facts">
       <div class="fact"><div class="k">Depart</div><div class="v mono">Sun 4:25 PM</div><div class="s">Nov 15 · DFW</div></div>
       <div class="fact"><div class="k">Land in Cusco</div><div class="v mono">Mon 8:45 AM</div><div class="s">Nov 16 · via ATL &amp; LIM</div></div>
       <div class="fact"><div class="k">Trek</div><div class="v">4 days / 3 nights</div><div class="s">Nov 17 – 20 · group service</div></div>
       <div class="fact"><div class="k">Home</div><div class="v mono">Sat 10:40 PM</div><div class="s">Nov 21 · leave Cusco 8:05 AM</div></div>
     </div>
+    <div class="booking">
+      <div class="booking-head"><div><div class="eyebrow">Alpaca Expeditions · Group service</div><h3>Inca Trail booking</h3></div><span class="chip" id="bkStatus">2 of 5 done</span></div>
+      <ol class="steps" id="steps">
+        <li class="step" data-i="0"><button type="button" aria-label="Booking request sent"></button><span>Booked</span></li>
+        <li class="step" data-i="1"><button type="button" aria-label="Deposit received"></button><span>Deposit paid</span></li>
+        <li class="step" data-i="2"><button type="button" aria-label="Permits purchased"></button><span>Permits bought</span></li>
+        <li class="step" data-i="3"><button type="button" aria-label="Official confirmation received"></button><span>Confirmation email</span></li>
+        <li class="step" data-i="4"><button type="button" aria-label="Checked in and balance paid"></button><span>Checked in &amp; paid</span></li>
+      </ol>
+      <p style="margin:0;font-size:13px;color:var(--muted)">Tap a step when it happens. Next up: Alpaca buys the permits and emails the official confirmation.</p>
+      <div class="bk-grid">
+        <div><div class="k">Travelers</div><div class="v">Vivek &amp; Meghna</div></div>
+        <div><div class="k">Coordinator</div><div class="v">Melany, Alpaca Expeditions</div></div>
+        <div><div class="k">Start</div><div class="v">Tue Nov 17, 2026 · 4D/3N</div></div>
+        <div><div class="k">Rentals</div><div class="v">1 set of walking sticks (Meghna)</div></div>
+        <div><div class="k">Meals</div><div class="v">No beef or pork, both (registered)</div></div>
+        <div><div class="k">Luggage</div><div class="v">Free storage: hand extra bags to your guide at pickup</div></div>
+        <div><div class="k">Cancellations</div><div class="v">In writing to <span class="mono" style="font-size:13px">info@alpacaexpeditions.com</span><button class="mini" type="button" id="copyEmail">Copy</button></div></div>
+        <div><div class="k">Deposit</div><div class="v">$200 per person, paid · non-refundable</div></div>
+        <div><div class="k">Balance</div><div class="v">Pay at office check-in, Nov 16 · USD cash preferred (card +5%, PayPal +5.5%)</div></div>
+        <div><div class="k">Briefing</div><div class="v">Mon Nov 16, 6:00 PM at the office · bring a pen · get duffel bags</div></div>
+        <div style="grid-column:1/-1"><div class="k">Alpaca office</div><div class="v">Calle Heladeros 157, Offices 24–25, 2nd floor, near the Plaza de Armas. Look for a small black plaque with gold “ALPACA EXPEDITIONS” over the door. Open daily 9 AM–1 PM and 3–7 PM. <a href="https://www.google.com/maps/search/?api=1&amp;query=Calle+Heladeros+157+Cusco+Peru" target="_blank" rel="noopener">Open in Maps</a></div></div>
+      </div>
+    </div>
+    <h2 style="font-size:24px;margin:0 0 10px">Where you’re staying</h2>
+    <div class="stays">
+      <article class="stay">
+        <div><div class="eyebrow">Night 1 · Airbnb</div><h3>San Blas Loft Cozy Stay Near Main Square</h3><div class="who">Host: Hilda · 2 adults</div></div>
+        <div class="inout"><div><div class="k">Check-in</div><b>Mon 1:00 PM</b><span>Nov 16</span></div><div class="arrow">→</div><div class="r"><div class="k">Checkout</div><b>Tue 11:00 AM</b><span>Nov 17</span></div></div>
+        <div class="flag">You land at 8:45 AM and leave on the trek before dawn</div>
+        <ul>
+          <li>Ask Hilda about dropping bags before 1 PM, and how to leave the keys when you go out early on the 17th.</li>
+          <li>San Blas has narrow, stepped streets. Alpaca suggests agreeing the pickup spot directly with your guide.</li>
+        </ul>
+      </article>
+      <article class="stay">
+        <div><div class="eyebrow">Night 5 · Airbnb</div><h3>Casona Santa Teresa</h3><div class="who">Host: Cinthya · historic center · 2 adults</div></div>
+        <div class="inout"><div><div class="k">Check-in</div><b>Fri 1:00 PM</b><span>Nov 20</span></div><div class="arrow">→</div><div class="r"><div class="k">Checkout</div><b>Sat 10:00 AM</b><span>Nov 21</span></div></div>
+        <div class="flag">Cinthya doesn’t live there and meets you with the keys</div>
+        <ul>
+          <li>You arrive by land with Alpaca around 8:00 PM, not by plane. Agree a meeting time with her.</li>
+          <li>You leave around 6 AM for the 8:05 AM flight, before checkout. Ask how to leave the keys.</li>
+          <li>Central location, so Alpaca’s drop-off should be easy.</li>
+        </ul>
+      </article>
+    </div>
     <div class="alerts">
-      <div class="alert warn"><div><b>Only one day to acclimatize</b><p>You land at about 3,400 m (11,150 ft) on the 16th and start hiking on the 17th, with the trail topping out at 4,215 m on day 2. Keep the 16th easy and plan your altitude approach ahead of time.</p></div></div>
-      <div class="alert warn"><div><b>Bring your original passport on the trek</b><p>It's checked at the KM 82 trailhead and has to match the passport details on your Inca Trail permit. A photocopy won't get you through.</p></div></div>
-      <div class="alert info"><div><b>Short turnaround on the 20th → 21st</b><p>After Machu Picchu you ride the bus and train back toward Cusco and arrive late in the evening, then fly out at 8:05 AM. Book a Cusco hotel for the night of the 20th close to the airport and pack the night before.</p></div></div>
+      <div class="alert warn"><div><b>Nov 16 is a full day in Cusco</b><p>After you land, check in at the Alpaca office with your original passport and pay the balance (office hours 9 AM–1 PM and 3–7 PM). Then come back at 6:00 PM for the trek briefing, where you get your duffel bags. Alpaca prefers the balance in US dollar cash in good condition; cards add 5% and PayPal adds 5.5%.</p></div></div>
+      <div class="alert warn"><div><b>Alpaca recommends 2 days in Cusco. You have 1.</b><p>You land at about 3,400 m (11,150 ft) on the 16th and start hiking on the 17th, with the trail topping out at 4,215 m on day 2. Alpaca asked to be told in advance if you won't be in Cusco 2 days ahead, so let them know you arrive the 16th. Keep the 16th easy and plan your altitude approach ahead of time.</p></div></div>
+      <div class="alert warn"><div><b>Bring your original passport on the trek</b><p>Permits are issued under your name and passport number, and they're checked at the KM 82 trailhead. Use the same passports you booked with. A photocopy won't get you through. To enter Peru, a passport must be valid for 6+ months past your visit. If you renew before the trip, bring the old passport too: the trail rangers only need the one that matches the permit.</p></div></div>
+      <div class="alert info"><div><b>Late arrival, early exit on the 20th → 21st</b><p>Alpaca brings you back to Cusco around 8:00 PM, you meet Cinthya at Casona Santa Teresa for the keys, and you fly out at 8:05 AM. Ask Alpaca how you get your stored luggage back that evening, since their office closes at 7 PM.</p></div></div>
+      <div class="alert info"><div><b>Permits can't be refunded</b><p>Once Alpaca buys the permits they're 100% non-refundable and non-transferable. If you ever had to cancel, Alpaca will give you an official letter for a travel insurance claim.</p></div></div>
       <div class="alert ok"><div><b>No time change</b><p>Peru stays on UTC−5 all year. After US clocks fall back on Nov 1, Cusco and Dallas are on the same clock.</p></div></div>
     </div>
   </section>
@@ -339,9 +426,11 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
         </div>
         <div class="field"><label for="air">Airfare / person ($)</label><input id="air" type="number" min="0" value="1860"></div>
         <div class="field"><label for="tour">Alpaca tour / person ($)</label><input id="tour" type="number" min="0" placeholder="from receipt"></div>
+        <div class="field"><label for="dep">Alpaca deposit paid ($)</label><input id="dep" type="number" min="0" value="400"></div>
         <div class="field"><label for="hotel">Hotels total ($)</label><input id="hotel" type="number" min="0" placeholder="0"></div>
       </div>
       <div><div class="total mono" id="total">$3,720</div><small id="totalNote" style="color:var(--muted)">Airfare only so far. Add the tour price and hotels to see the full total.</small></div>
+      <div id="balBox" hidden style="border-top:1px solid var(--line);padding-top:12px"><div class="eyebrow">Still owed to Alpaca · pay at check-in, Nov 16</div><div class="total mono" id="bal" style="font-size:26px;margin-top:4px">$0</div></div>
     </div>
   </section>
 
@@ -381,7 +470,7 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
     <div class="tips">
       <div class="tip"><h3>Altitude</h3><p>Go slow on the 16th, hydrate, skip alcohol, eat light. Coca tea is everywhere in Cusco. If you plan to use acetazolamide, start it on your usual schedule before arrival rather than once symptoms begin.</p></div>
       <div class="tip"><h3>Weather</h3><p>November is the start of the rainy season. Expect sun, cloud and showers in the same day, warm cloud forest on days 3–4, and near-freezing nights at the high camps.</p></div>
-      <div class="tip"><h3>Money</h3><p>Peru uses the sol (PEN). Carry small soles for snacks, toilets on the trail and tipping the porters and cook on the last evening. Cards work in Cusco restaurants and hotels.</p></div>
+      <div class="tip"><h3>Money</h3><p>Peru uses the sol (PEN). Bring clean, untorn bills; damaged ones get refused. Alpaca takes its balance in US dollars. Carry small soles for snacks, toilets on the trail and tipping the porters and cook on the last evening. Cards work in Cusco restaurants and hotels.</p></div>
       <div class="tip"><h3>Power</h3><p>Peru runs on 220 V. Phone and laptop chargers usually handle it; check anything with a heating element. Bring a battery pack, since campsites have no outlets.</p></div>
       <div class="tip"><h3>Water</h3><p>Don't drink tap water. Alpaca supplies boiled water on the trek from the first lunch through the last breakfast, so bring bottles to refill.</p></div>
       <div class="tip"><h3>Day 4 food</h3><p>Lunch on the last day isn't included. Plan to eat in Aguas Calientes before the train.</p></div>
@@ -434,12 +523,12 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
   /* Day by day */
   const days=[
     {date:'Sun Nov 15',type:'fly',title:'Fly overnight to Peru',chips:['DFW 4:25 PM','ATL layover 2h 47m'],items:['Depart DFW 4:25 PM for Atlanta.','2 h 47 min layover in ATL, then the overnight flight to Lima.','Wear trail shoes or carry them on, and keep passport, meds and a warm layer in your carry-on.']},
-    {date:'Mon Nov 16',type:'rest',title:'Arrive Cusco, rest and acclimatize',chips:['CUZ 8:45 AM','~3,400 m'],items:['Clear immigration in Lima, connect to Cusco, land 8:45 AM.','Check in (or drop bags), nap, hydrate. Short flat walks only: Plaza de Armas, San Blas.','Go to the Alpaca pre-trek briefing if they’ve scheduled one, and confirm the pickup time and hotel.','Pack the porter duffel and daypack. Leave the rest of your luggage with the hotel.','Early night. Pickup on the 17th is very early.']},
-    {date:'Tue Nov 17',type:'trek',title:'Trek day 1 · KM 82 to Ayapata',chips:['14 km','6–7 h','Moderate'],items:['Hotel pickup in Cusco and drive to KM 82 (Piskacucho).','Passport check at the trailhead checkpoint.','Hike past the Inca site of Llactapata to camp at Ayapata.','A warm-up day to get used to the trail.']},
+    {date:'Mon Nov 16',type:'rest',title:'Arrive Cusco, check in with Alpaca, briefing',chips:['CUZ 8:45 AM','Alpaca check-in','Airbnb 1 PM','Briefing 6 PM'],items:['Clear immigration in Lima, connect to Cusco, land 8:45 AM.','Check in at the Alpaca office (open 9 AM–1 PM): bring your original passports and the balance, ideally in US dollar cash in good condition. Ask about leaving bags if Hilda can’t take them early.','1:00 PM: check in at the San Blas Loft (host Hilda). Rest and hydrate.','6:00 PM: trek briefing at the office with your guide and group. Bring a pen. You get your duffel bags here.','Pack the duffel for the porters (you won’t see it until camp) and keep daytime things in your daypack. Extra luggage goes to your guide at pickup.','Early night. Pickup on the 17th is very early, so sort out key drop-off with Hilda tonight.']},
+    {date:'Tue Nov 17',type:'trek',title:'Trek day 1 · KM 82 to Ayapata',chips:['14 km','6–7 h','Moderate'],items:['Pickup from the San Blas Loft, or the spot you agreed with your guide. Hand your extra luggage to the guide; Alpaca stores it free.','Leave the keys as Hilda asked (checkout is 11 AM, long after you’ve gone).','Drive to KM 82 (Piskacucho).','Passport check at the trailhead checkpoint.','Hike past the Inca site of Llactapata to camp at Ayapata.','A warm-up day to get used to the trail.','Meals: your no-beef, no-pork request is on file for both of you.']},
     {date:'Wed Nov 18',type:'trek',title:'Trek day 2 · Dead Woman’s Pass',chips:['High point 4,215 m','Hardest day'],items:['Early wake-up with coca tea from the porters.','Long climb to Dead Woman’s Pass (Warmiwañusca), the highest point of the trail.','Descend to Pacaymayo, climb again past Runkurakay, then on to camp at Chaquicocha.','You’ll have done both big passes by evening.']},
     {date:'Thu Nov 19',type:'trek',title:'Trek day 3 · Cloud forest to Wiñay Wayna',chips:['10 km','~5 h','Mostly downhill'],items:['Wake around 6:30 AM. Often called the most beautiful day of the trail.','Cloud forest, Inca tunnels and Phuyupatamarca.','Camp near Wiñay Wayna and walk over to see the ruins.','Evening thank-you with the porters and cook; this is when tips are usually given.']},
-    {date:'Fri Nov 20',type:'trek',title:'Trek day 4 · Sun Gate and Machu Picchu',chips:['Wake 3:30 AM','Sun Gate'],items:['Very early start to queue at the final checkpoint.','Walk to the Sun Gate (Inti Punku) for the first view of Machu Picchu.','Guided tour of the citadel.','Bus down to Aguas Calientes, lunch on your own, then the train and transfer back toward Cusco. Expect to arrive late.']},
-    {date:'Sat Nov 21',type:'fly',title:'Fly home',chips:['CUZ 8:05 AM','DFW 10:40 PM'],items:['Leave the hotel early for the 8:05 AM flight out of Cusco.','Connect home; land at DFW 10:40 PM.']}
+    {date:'Fri Nov 20',type:'trek',title:'Trek day 4 · Sun Gate and Machu Picchu',chips:['Wake 3:30 AM','Sun Gate','Cusco ~8 PM'],items:['Very early start to queue at the final checkpoint.','Walk to the Sun Gate (Inti Punku) for the first view of Machu Picchu.','Guided tour of the citadel.','Bus down to Aguas Calientes, lunch on your own, then the train and transfer back to Cusco.','Back in Cusco around 8:00 PM. Drop-off at Casona Santa Teresa, meet Cinthya for the keys, and collect your stored luggage.']},
+    {date:'Sat Nov 21',type:'fly',title:'Fly home',chips:['Leave ~6 AM','CUZ 8:05 AM','DFW 10:40 PM'],items:['Leave Casona Santa Teresa around 6 AM for the 8:05 AM flight. Leave the keys as Cinthya asked (checkout is 10 AM).','Connect home; land at DFW 10:40 PM.']}
   ];
   const spine=$('#spine');
   const openSet=new Set(store.get('peru.openDays',[1]));
@@ -466,21 +555,38 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
   function setAll(open){document.querySelectorAll('.day').forEach((li,i)=>{li.classList.toggle('open',open);li.querySelector('.day-btn').setAttribute('aria-expanded',open);open?openSet.add(i):openSet.delete(i)});store.set('peru.openDays',[...openSet])}
   $('#expandAll').onclick=()=>setAll(true);$('#collapseAll').onclick=()=>setAll(false);
 
+  /* Booking tracker */
+  (function(){
+    let st=store.get('peru.booking',[true,true,false,false,false]);
+    const items=[...document.querySelectorAll('#steps .step')];
+    function draw(){
+      const next=st.indexOf(false);
+      items.forEach((li,i)=>{li.classList.toggle('done',st[i]);li.classList.toggle('next',i===next);li.querySelector('button').setAttribute('aria-pressed',st[i])});
+      const n=st.filter(Boolean).length; $('#bkStatus').textContent = n===5?'All set':`${n} of 5 done`;
+    }
+    items.forEach((li,i)=>li.querySelector('button').addEventListener('click',()=>{st[i]=!st[i];store.set('peru.booking',st);draw();if(st[i])toast(li.querySelector('span').textContent+' ✓')}));
+    draw();
+    $('#copyEmail').addEventListener('click',()=>{const t='info@alpacaexpeditions.com';
+      navigator.clipboard?.writeText(t).then(()=>toast('Email copied'),()=>toast(t)) ?? toast(t)});
+  })();
+
   /* Cost calc */
   let pax=store.get('peru.pax',2);
-  const air=$('#air'),tour=$('#tour'),hotel=$('#hotel');
-  air.value=store.get('peru.air',1860);tour.value=store.get('peru.tour','');hotel.value=store.get('peru.hotel','');
+  const air=$('#air'),tour=$('#tour'),hotel=$('#hotel'),depIn=$('#dep');
+  air.value=store.get('peru.air',1860);tour.value=store.get('peru.tour','');hotel.value=store.get('peru.hotel','');depIn.value=store.get('peru.dep',400);
   const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
   function calc(){
     $('#pax').textContent=pax;
     const a=+air.value||0,t=+tour.value||0,h=+hotel.value||0;
     $('#total').textContent=fmt(pax*(a+t)+h);
     $('#totalNote').textContent = t? `${pax} × (${fmt(a)} air + ${fmt(t)} tour)${h?' + '+fmt(h)+' hotels':''} · about ${fmt((pax*(a+t)+h)/pax)} per person` : 'Airfare only so far. Add the tour price and hotels to see the full total.';
+    $('#balBox').hidden=!t; $('#bal').textContent=fmt(Math.max(0,pax*t-(+depIn.value||0)));
+    store.set('peru.dep',depIn.value);
     store.set('peru.pax',pax);store.set('peru.air',air.value);store.set('peru.tour',tour.value);store.set('peru.hotel',hotel.value);
   }
   $('#paxMinus').onclick=()=>{pax=Math.max(1,pax-1);calc()};
   $('#paxPlus').onclick=()=>{pax=Math.min(12,pax+1);calc()};
-  [air,tour,hotel].forEach(el=>el.addEventListener('input',calc));calc();
+  [air,tour,hotel,depIn].forEach(el=>el.addEventListener('input',calc));calc();
 
   /* Elevation profile */
   const pts=[
@@ -539,15 +645,15 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
     return {reset(){boxes.forEach(b=>{b.checked=false;state[b.id]=false});store.set(key,state);upd();toast('Checks cleared')}};
   }
   const pack=checklist('peru.pack',[
-    {h:'Documents & money',items:[['Original passport','Needed at the KM 82 checkpoint; valid 6+ months'],'Copy of passport (paper + phone)','Printed Alpaca voucher & e-tickets','Travel insurance details','Credit card + debit card',['Small soles in cash','Snacks, trail toilets, tips']]},
-    {h:'On the trail',items:['Broken-in hiking boots','Daypack with rain cover','Rain jacket + poncho','Down or puffy jacket','Fleece mid-layer','Quick-dry hiking shirts & pants','Warm hat, gloves, buff','Wool socks (one pair per day)','Headlamp + spare batteries',['Trekking poles','Rubber tips are required on the trail'],'2 water bottles or a bladder',['Sleeping bag','Rent one from Alpaca if you don’t bring your own']]},
+    {h:'Documents & money',items:[['Original passport','For Alpaca check-in and the KM 82 checkpoint; valid 6+ months'],'Copy of passport (paper + phone)','Printed Alpaca voucher & e-tickets','Travel insurance details','Credit card + debit card',['Small soles in cash','Snacks, trail toilets, tips'],['US dollar cash for the Alpaca balance','Clean, untorn bills. Cards add 5%.'],'Pen for the briefing']},
+    {h:'On the trail',items:['Broken-in hiking boots','Daypack with rain cover','Rain jacket + poncho','Down or puffy jacket','Fleece mid-layer','Quick-dry hiking shirts & pants','Warm hat, gloves, buff','Wool socks (one pair per day)','Headlamp + spare batteries',['Trekking poles','Meghna’s are rented from Alpaca. Vivek: bring or rent. Rubber tips required.'],'2 water bottles or a bladder',['Sleeping bag','Rent one from Alpaca if you don’t bring your own']]},
     {h:'Health & care',items:['Personal meds + small first-aid kit','Blister care (moleskin, tape)','Sunscreen, lip balm with SPF','Sunglasses + sun hat','Insect repellent (cloud forest)','Hand sanitizer, wipes, toilet paper','Electrolytes & trail snacks']},
-    {h:'Tech & Cusco days',items:['Phone, charger, battery pack','Offline maps downloaded','Camp sandals or light shoes','Comfortable clothes for Cusco evenings','Small lock for duffel','Earplugs + eye mask']}
+    {h:'Tech & Cusco days',items:['Phone, charger, battery pack','Offline maps downloaded','Camp sandals or light shoes','Comfortable clothes for Cusco evenings',['Small lock for duffel','Also for the bag Alpaca stores'],'Earplugs + eye mask']}
   ],'#packGroups','#packBar','#packCount');
   $('#packReset').onclick=()=>pack.reset();
   checklist('peru.todo',[
-    {h:'Book',items:[['Cusco hotel, night of Nov 16','Ask about early check-in (you land 8:45 AM)'],['Cusco hotel, night of Nov 20','Ask to store luggage during the trek'],['Airport transfers','CUZ on the 16th, and early on the 21st'],['Travel insurance','Make sure it covers trekking to ~4,200 m']]},
-    {h:'Confirm with Alpaca',items:['Briefing time and place in Cusco','Pickup time + hotel address for Nov 17','Passport numbers on the permit match your passports','Porter duffel weight limit','Sleeping bag / pole rentals','Return train time on Nov 20']},
+    {h:'Stays',items:[['Message Hilda (San Blas Loft, Nov 16)','Your 8:45 AM landing, early bag drop, and key drop-off before the early pickup'],['Reply to Cinthya (Casona Santa Teresa, Nov 20)','Arriving by land around 8 PM with Alpaca, leaving ~6 AM; ask about keys'],['Ask Alpaca how to get your stored luggage on Nov 20','You’re back around 8 PM and the office closes at 7'],['Airport transfers','CUZ on the 16th, and early on the 21st'],['Travel insurance','Make sure it covers trekking to ~4,200 m']]},
+    {h:'Alpaca',items:[['Email Alpaca your pickup and drop-off addresses','San Blas Loft for Nov 17, Casona Santa Teresa for Nov 20'],['Tell Alpaca you arrive Nov 16','Only 1 day before the trek; confirm check-in and the 6 PM briefing'],['Get US dollar cash for the balance','Paid at office check-in on Nov 16. Bills must be in good condition.'],['Official confirmation email','Sent once the permits are bought'],'Pickup time for Nov 17','Passport numbers on the permit match your passports','Porter duffel weight limit',['Sleeping bag rentals','Walking sticks already booked for Meghna']]},
     {h:'Health & admin',items:['Plan altitude approach / prophylaxis','Check routine vaccines + Hep A, typhoid','Tell your bank you’ll be in Peru','eSIM or international phone plan','Check passport has 2 blank pages']}
   ],'#todoGroups','#todoBar','#todoCount');
 
