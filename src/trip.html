@@ -173,6 +173,17 @@ button{font:inherit;color:inherit}
 .kv .wide{grid-column:1/-1}
 .mini{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:2px 10px;font-size:12px;cursor:pointer;margin-left:6px;vertical-align:1px}
 
+.explain{border-top:1px solid var(--line);padding-top:10px}
+.explain summary{cursor:pointer;font-weight:600;font-size:14.5px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.explain summary::-webkit-details-marker{display:none}
+.explain summary::after{content:"";width:9px;height:9px;border:solid var(--muted);border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .25s;margin-right:4px}
+.explain[open] summary::after{transform:rotate(-135deg)}
+.explain .body{display:grid;gap:10px;padding-top:10px;font-size:14.5px;animation:rise .3s ease}
+.explain ol{margin:0;padding-left:20px}
+.explain li{margin-bottom:5px}
+.explain .you{background:var(--accent-soft);border-radius:10px;padding:10px 12px}
+.explain .you b{color:var(--accent)}
+
 /* Stays */
 .stays{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
 .stay{display:grid;gap:10px;min-width:0}
@@ -428,6 +439,19 @@ button{font:inherit;color:inherit}
         <li class="step" data-i="3"><button type="button" aria-label="Confirmation email"></button><span>Confirmation email</span></li>
         <li class="step" data-i="4"><button type="button" aria-label="Checked in and balance paid"></button><span>Checked in &amp; paid</span></li>
       </ol>
+      <details class="explain" id="permitInfo">
+        <summary>Permits: who buys them, and what you need to do</summary>
+        <div class="body">
+          <p style="margin:0"><b>You don’t buy permits yourselves. Alpaca buys them for you.</b> Inca Trail permits are sold only to licensed tour operators, through Peru’s Ministry of Culture, and each one is issued to a named person and passport number.</p>
+          <ol>
+            <li><b>You paid the deposit.</b> That let Alpaca request your permits (done Oct 24).</li>
+            <li><b>Alpaca buys the permits</b> for Nov 17 under your names and passport numbers. From then on they can’t be refunded, changed or transferred.</li>
+            <li><b>Alpaca confirms by email.</b> Their Nov 12 email listed both passport numbers to check, which is your confirmation. Tick “Permits bought” and “Confirmation email”.</li>
+            <li><b>Rangers check them at KM 82</b> on Nov 17, against your original passports.</li>
+          </ol>
+          <div class="you"><b>Your part:</b> reply to Alpaca confirming the passport numbers are right, and carry those same original passports at check-in and on the trail. If either number is wrong, tell Alpaca right away.</div>
+        </div>
+      </details>
       <div class="kv">
         <div><div class="k">Included</div><div class="v">Machu Picchu Route 3-B · Vistadome train back (Nov 20)</div></div>
         <div><div class="k">Rentals</div><div class="v">Walking sticks for Meghna. Others need 48 h notice.</div></div>

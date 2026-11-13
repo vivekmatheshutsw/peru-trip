@@ -1,5 +1,5 @@
 // Bump VERSION whenever the trip page changes so phones pick up the update.
-const VERSION = 'peru-v8';
+const VERSION = 'peru-v9';
 const CORE = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'];
 
 self.addEventListener('install', e => {
