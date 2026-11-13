@@ -184,6 +184,18 @@ button{font:inherit;color:inherit}
 .explain .you{background:var(--accent-soft);border-radius:10px;padding:10px 12px}
 .explain .you b{color:var(--accent)}
 
+.payopts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
+.po{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;gap:2px;background:var(--bg)}
+.po.best{border-color:var(--moss);background:var(--moss-soft)}
+.po .lab{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.po.best .lab{color:var(--moss)}
+.po b{font-size:15px}
+.po .amt{font-family:var(--f-mono);font-size:20px;font-variant-numeric:tabular-nums}
+.po small{color:var(--muted);font-size:12.5px}
+.route2{display:grid;gap:0;border-left:2px solid var(--line);margin-left:4px}
+.route2 div{padding:4px 0 4px 12px;position:relative;font-size:14.5px}
+.route2 div::before{content:"";position:absolute;left:-5px;top:11px;width:8px;height:8px;border-radius:50%;background:var(--surface);border:2px solid var(--accent)}
+
 /* Stays */
 .stays{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
 .stay{display:grid;gap:10px;min-width:0}
@@ -452,6 +464,34 @@ button{font:inherit;color:inherit}
           <div class="you"><b>Your part:</b> reply to Alpaca confirming the passport numbers are right, and carry those same original passports at check-in and on the trail. If either number is wrong, tell Alpaca right away.</div>
         </div>
       </details>
+      <details class="explain" id="payInfo">
+        <summary>Paying the balance: when, where and how</summary>
+        <div class="body">
+          <p style="margin:0"><b>When:</b> at your Alpaca office check-in on <b>Mon Nov 16</b>, after you land. The office is open 9 AM–1 PM and 3–7 PM. Staff go through your invoice with you, then take payment.</p>
+          <p style="margin:0"><b>Where:</b> Alpaca office, <b>Calle Heladeros 157, Offices 24–25, 2nd floor</b>, a short walk from the Plaza de Armas. Look for a small black plaque with gold “ALPACA EXPEDITIONS” over the door, then go upstairs. <a href="https://www.google.com/maps/search/?api=1&amp;query=Calle+Heladeros+157+Cusco+Peru" target="_blank" rel="noopener">Open in Maps</a></p>
+          <p style="margin:0"><b>Bring:</b> both original passports, plus the payment.</p>
+          <div><div class="eyebrow" style="margin-bottom:6px">Three ways to pay <span id="payNote"></span></div>
+            <div class="payopts">
+              <div class="po best"><span class="lab">Preferred · no fee</span><b>US dollar cash</b><span class="amt" id="payCash">—</span><small>Only US dollars. Any bill size, but clean and untorn: worn or damaged bills get refused.</small></div>
+              <div class="po"><span class="lab">+5% fee</span><b>Card at the office</b><span class="amt" id="payCard">—</span><small>Visa, Mastercard, Amex, Discover, Diners, UnionPay, JCB and more.</small></div>
+              <div class="po"><span class="lab">+5.5% fee</span><b>PayPal</b><span class="amt" id="payPal">—</span><small>Alpaca walks you through it. You enter the total and PayPal adds its fee.</small></div>
+            </div>
+            <button class="linkbtn" type="button" id="payEdit" hidden>Enter the tour price to see exact amounts →</button>
+          </div>
+          <div><div class="eyebrow" style="margin-bottom:6px">Need US dollars in Cusco?</div>
+            <p style="margin:0">Easiest is to bring them from home. Otherwise use <b>BCP bank, Portal de Panes 177</b>, right on the Plaza de Armas: a teller gives US dollars at the counter. Bring your passport and a Visa card with raised numbers and your full name, matching the passport. It’s slower than an ATM, and fees depend on your bank. Open Mon–Fri 9 AM–5 PM, Sat 9 AM–noon.</p>
+          </div>
+          <div><div class="eyebrow" style="margin-bottom:6px">Suggested route on Nov 16</div>
+            <div class="route2">
+              <div>Land 8:45 AM, taxi to the center</div>
+              <div>If you need cash: BCP on the plaza (opens 9 AM)</div>
+              <div>Alpaca office on Calle Heladeros, a few minutes’ walk away. Pay and finish check-in before 1 PM</div>
+              <div>1 PM: check in at the San Blas Loft and rest</div>
+            </div>
+          </div>
+          <div class="you"><b>Tips:</b> count and check your bills before you leave home, and keep the balance separate from your spending money. Ask for a receipt. Alpaca’s first email mentioned paying 2 days ahead; their later emails say to pay at check-in, so check-in is the plan.</div>
+        </div>
+      </details>
       <div class="kv">
         <div><div class="k">Included</div><div class="v">Machu Picchu Route 3-B · Vistadome train back (Nov 20)</div></div>
         <div><div class="k">Rentals</div><div class="v">Walking sticks for Meghna. Others need 48 h notice.</div></div>
@@ -610,7 +650,7 @@ button{font:inherit;color:inherit}
     <div class="sec" id="ref-money"><h2>Money</h2></div>
     <div class="notes">
       <div class="card note"><h3>What to carry</h3><ul>
-        <li><b>US dollars</b> for the Alpaca balance. Bills must be clean and untorn.</li>
+        <li><b>US dollars</b> for the Alpaca balance. Bills must be clean and untorn. Plan → Paying the balance has the details.</li>
         <li><b>Soles</b> for small purchases, taxis, toilets (often 1 sol), bag storage and crew tips.</li>
         <li><b>Cards</b> work at most Cusco restaurants and shops. Alpaca adds 5% for cards and 5.5% for PayPal.</li></ul></div>
       <div class="card note"><h3>Getting cash</h3><ul>
@@ -712,7 +752,7 @@ button{font:inherit;color:inherit}
     {date:'Mon Nov 16',iso:'2026-11-16',wd:'Mon',dn:16,type:'rest',short:'Cusco',sleep:'San Blas Loft',alt:3400,
      title:'Arrive Cusco: check-in, cash, briefing',sum:'Land 8:45 AM. Alpaca check-in, then the 6 PM briefing.',
      chips:['CUZ 8:45 AM','Airbnb 1 PM','Briefing 6 PM','3,400 m'],
-     sched:[['Early','Lima: immigration, collect bags, re-check for Cusco'],['8:45 AM','Land in Cusco, taxi to the center'],['By 1 PM','Alpaca office check-in: passports + balance'],['Midday','Light lunch, cash from BCP if needed'],['1:00 PM','Check in at the San Blas Loft (Hilda), rest'],['6:00 PM','Briefing at the Alpaca office, collect duffels'],['Evening','Pack duffel and daypack, early night']],
+     sched:[['Early','Lima: immigration, collect bags, re-check for Cusco'],['8:45 AM','Land in Cusco, taxi to the center'],['By 1 PM','Alpaca office check-in: passports + balance (see Plan → Paying the balance)'],['Midday','Light lunch, cash from BCP if needed'],['1:00 PM','Check in at the San Blas Loft (Hilda), rest'],['6:00 PM','Briefing at the Alpaca office, collect duffels'],['Evening','Pack duffel and daypack, early night']],
      expect:['Altitude hits on arrival: breathlessness on stairs, maybe a headache. Normal.','The briefing covers the route, wake-up times and gear, and you meet your group.','You’ll get duffel bags, ponchos and backpack covers at the briefing.'],
      approach:['Do the Alpaca check-in in the morning window, before fatigue sets in.','Take a taxi up to San Blas with luggage. Walking it on arrival day is hard work.','Ask your guide at the briefing exactly where the San Blas pickup will be.','Sort out the key drop-off with Hilda before bed. You leave before she’s up.'],
      carry:['Original passports','USD cash','Pen + notepad','Water']},
@@ -910,9 +950,12 @@ button{font:inherit;color:inherit}
     const a=+air.value||0,t=+tour.value||0,h=+hotel.value||0;
     $('#total').textContent=fmt(pax*(a+t)+h);
     $('#totalNote').textContent=t?`${pax} × (${fmt(a)} air + ${fmt(t)} tour)${h?' + '+fmt(h)+' stays':''} · about ${fmt((pax*(a+t)+h)/pax)} per person`:'Airfare only so far. Add the tour price and stays to see the full total.';
-    $('#balBox').hidden=!t; $('#bal').textContent=fmt(Math.max(0,pax*t-(+depIn.value||0)));
+    $('#balBox').hidden=!t; const owed=Math.max(0,pax*t-(+depIn.value||0)); $('#bal').textContent=fmt(owed);
+    $('#payCash').textContent=t?fmt(owed):'—'; $('#payCard').textContent=t?fmt(owed*1.05):'—'; $('#payPal').textContent=t?'≈ '+fmt(owed*1.055):'—';
+    $('#payNote').textContent=t?`· balance ${fmt(owed)} for ${pax}`:''; $('#payEdit').hidden=!!t;
     store.set('peru.pax',pax);store.set('peru.air',air.value);store.set('peru.tour',tour.value);store.set('peru.hotel',hotel.value);store.set('peru.dep',depIn.value);
   }
+  $('#payEdit').addEventListener('click',()=>{show('ref');setTimeout(()=>document.getElementById('ref-cost').scrollIntoView({behavior:'smooth'}),60)});
   $('#paxMinus').onclick=()=>{pax=Math.max(1,pax-1);calc()};
   $('#paxPlus').onclick=()=>{pax=Math.min(12,pax+1);calc()};
   [air,tour,hotel,depIn].forEach(el=>el.addEventListener('input',calc));calc();
