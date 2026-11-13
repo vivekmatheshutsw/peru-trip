@@ -83,27 +83,77 @@ button{font:inherit;color:inherit}
 .panel h2{font-size:28px;margin-bottom:6px}
 .lede{color:var(--muted);margin:0 0 20px;max-width:65ch}
 
-/* Overview */
-.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:24px}
-.fact{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
-.fact .k{font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
-.fact .v{font-family:var(--f-display);font-size:22px;margin-top:2px}
-.fact .s{font-size:13px;color:var(--muted)}
+/* Section heads */
+.sec{display:grid;gap:4px;margin:30px 0 12px}
+.sec:first-child{margin-top:0}
+.sec h2{font-size:26px;margin:0}
+.sec p{margin:0;color:var(--muted);max-width:62ch;font-size:14.5px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.muted{color:var(--muted)}
 
-.alerts{display:grid;gap:10px;margin-bottom:26px}
-.alert{display:grid;grid-template-columns:4px 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px 14px 0;overflow:hidden}
-.alert::before{content:"";border-radius:0 4px 4px 0}
-.alert.warn::before{background:var(--warn)}
-.alert.info::before{background:var(--sky)}
-.alert.ok::before{background:var(--moss)}
-.alert b{display:block;margin-bottom:2px}
-.alert p{margin:0;color:var(--muted);font-size:14.5px}
+/* Plan: trip shape */
+.shape{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.sd{border:0;background:none;padding:0;cursor:pointer;display:grid;gap:6px;text-align:left;min-width:0}
+.sd .wd{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.sd .wd b{display:block;font-size:17px;color:var(--ink)}
+.sd .bar{height:10px;border-radius:5px;background:var(--line);transition:transform .2s}
+.sd:hover .bar{transform:scaleY(1.4)}
+.sd.fly .bar{background:var(--sky)} .sd.rest .bar{background:var(--moss)} .sd.trek .bar{background:var(--accent)}
+.sd .what{font-size:12.5px;font-weight:600;line-height:1.25}
+.sd .sleep{font-size:11.5px;color:var(--muted);line-height:1.25}
+.sd .alt{height:44px;display:flex;align-items:flex-end}
+.sd .sleep .sm{display:none;font-style:normal}
+.sd .alt i{display:block;width:100%;border-radius:4px 4px 0 0;background:color-mix(in srgb,var(--moss) 38%,var(--line));transform-origin:bottom;animation:rise2 .9s ease-out}
+.sd .alt i span{display:block;font-family:var(--f-mono);font-size:10px;color:var(--muted);transform:translateY(-15px);white-space:nowrap}
+.sd.today .wd b{color:var(--accent)}
+.sd.today .bar{box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--accent)}
+@keyframes rise2{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.shape-key{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--muted);margin-top:12px}
+.shape-key i{display:inline-block;width:12px;height:6px;border-radius:3px;margin-right:6px;vertical-align:2px}
+@media (max-width:620px){
+  .shape{grid-template-columns:1fr;gap:0}
+  .sd{grid-template-columns:52px 6px 1fr auto;align-items:center;gap:12px;padding:9px 0;border-top:1px solid var(--line)}
+  .sd:first-child{border-top:0}
+  .sd .bar{width:6px;height:34px}
+  .sd .alt{display:none}
+  .sd .sleep .sm{display:inline}
+  .sd .sleep{text-align:right;max-width:120px}
+}
+
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.phase{display:grid;gap:8px;align-content:start}
+.phase .when{font-family:var(--f-mono);font-size:12px;color:var(--accent);font-weight:700}
+.phase h3{font-size:20px}
+.phase p{margin:0;font-size:14.5px;color:var(--muted)}
+.phase .how{font-size:14px;border-top:1px dashed var(--line);padding-top:8px}
+.phase .how b{color:var(--ink)}
+
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.rule{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:14.5px}
+.rule .n{width:28px;height:28px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-family:var(--f-mono);font-weight:700;font-size:13px}
+.rule b{display:block}
+.rule span{color:var(--muted);font-size:13.5px}
+
+.next{display:grid;gap:0}
+.nx{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.nx:first-child{border-top:0}
+.nx .when{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:3px 9px;white-space:nowrap}
+.nx .t{font-size:14.5px;min-width:0}
+.nx .t small{display:block;color:var(--muted);font-size:12.5px}
+.linkbtn{border:0;background:none;color:var(--sky);font-weight:600;cursor:pointer;padding:4px 0;font-size:14px}
+
+.heads{display:grid;gap:8px}
+.hd{display:grid;grid-template-columns:4px 1fr;gap:12px;font-size:14.5px}
+.hd::before{content:"";border-radius:4px;background:var(--warn)}
+.hd.info::before{background:var(--sky)}
+.hd b{display:block}
+.hd span{color:var(--muted);font-size:14px}
 
 /* Booking */
-.booking{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:24px;display:grid;gap:16px}
+.booking{display:grid;gap:14px}
 .booking-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
-.booking-head h3{font-size:22px}
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:6px;position:relative}
+.booking-head h3{font-size:20px}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
 .step{display:grid;justify-items:center;text-align:center;gap:6px;position:relative}
 .step::before{content:"";position:absolute;top:15px;left:-50%;width:100%;height:3px;background:var(--line);z-index:0}
 .step:first-child::before{display:none}
@@ -114,76 +164,83 @@ button{font:inherit;color:inherit}
 .step.done button::after{content:"";width:6px;height:12px;border:solid var(--surface);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px);animation:pop .25s ease}
 .step.next button{border-color:var(--accent);animation:pulse 1.8s ease-in-out infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 45%,transparent)}50%{box-shadow:0 0 0 7px transparent}}
-.step span{font-size:12.5px;line-height:1.3;color:var(--muted)}
+.step span{font-size:12px;line-height:1.3;color:var(--muted)}
 .step.done span{color:var(--ink)}
-.bk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 18px}
-.bk-grid > div{border-top:1px solid var(--line);padding-top:8px;min-width:0}
-.bk-grid .k{font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
-.bk-grid .v{font-size:15px;overflow-wrap:anywhere}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px 18px}
+.kv > div{border-top:1px solid var(--line);padding-top:8px;min-width:0}
+.kv .k{font-size:11.5px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.kv .v{font-size:14.5px;overflow-wrap:anywhere}
+.kv .wide{grid-column:1/-1}
 .mini{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:2px 10px;font-size:12px;cursor:pointer;margin-left:6px;vertical-align:1px}
-@media (max-width:560px){.step span{font-size:11px}}
 
 /* Stays */
-.stays{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-bottom:24px}
-.stay{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;min-width:0}
-.stay h3{font-size:19px;line-height:1.2}
+.stays{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.stay{display:grid;gap:10px;min-width:0}
+.stay h3{font-size:18px;line-height:1.2}
 .stay .who{font-size:13px;color:var(--muted)}
 .inout{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;background:var(--bg);border-radius:10px;padding:10px 12px}
 .inout .k{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.inout b{display:block;font-family:var(--f-mono);font-size:15px;font-variant-numeric:tabular-nums}
+.inout b{display:block;font-family:var(--f-mono);font-size:14.5px}
 .inout span{font-size:12.5px;color:var(--muted)}
 .inout .r{text-align:right}
 .inout .arrow{color:var(--muted)}
 .stay ul{margin:0;padding-left:18px;font-size:14px}
 .stay li{margin-bottom:3px}
-.stay .flag{font-size:13px;color:var(--accent);font-weight:600}
 
-/* Contacts, duffel */
-.contacts{display:grid;gap:0}
-.ct{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:14.5px}
+/* Contacts */
+.ct{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--line);font-size:14.5px}
 .ct:first-child{border-top:0}
 .ct .n{min-width:0}
 .ct .n small{display:block;color:var(--muted);font-size:12.5px}
 .ct .num{font-family:var(--f-mono);font-size:13.5px;white-space:nowrap}
-.duffel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:18px;display:grid;gap:12px}
-.duffel h3{font-size:20px}
+@media (max-width:560px){.ct{grid-template-columns:1fr auto}.ct .num{grid-column:1/-1;grid-row:2}}
+
+/* Duffel */
 .wbar{display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--line);font-size:12.5px;font-weight:600}
 .wbar span{display:grid;place-items:center;color:var(--surface);white-space:nowrap;overflow:hidden;animation:grow 1s ease-out;transform-origin:left}
 .wbar .a{background:var(--moss)} .wbar .b{background:var(--accent)}
-.duffel ul{margin:0;padding-left:18px;font-size:14.5px}
-.duffel li{margin-bottom:4px}
-@media (max-width:560px){.ct{grid-template-columns:1fr auto}.ct .mini{grid-column:2}.ct .num{grid-column:1/-1;grid-row:2}}
 
-/* Spine */
+/* Days */
 .spine{list-style:none;margin:0;padding:0;position:relative}
 .spine::before{content:"";position:absolute;left:19px;top:8px;bottom:8px;width:2px;background:var(--line)}
-.day{position:relative;padding-left:52px;margin-bottom:12px}
+.day{position:relative;padding-left:52px;margin-bottom:12px;scroll-margin-top:80px}
 .dot{position:absolute;left:10px;top:16px;width:20px;height:20px;border-radius:50%;background:var(--surface);border:2px solid var(--muted);display:grid;place-items:center}
-.day.trek .dot{border-color:var(--accent)}
-.day.fly .dot{border-color:var(--sky)}
-.day.rest .dot{border-color:var(--moss)}
+.day.trek .dot{border-color:var(--accent);color:var(--accent)}
+.day.fly .dot{border-color:var(--sky);color:var(--sky)}
+.day.rest .dot{border-color:var(--moss);color:var(--moss)}
 .dot::after{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;opacity:0;transition:opacity .2s}
 .day.open .dot::after{opacity:1}
-.day.trek .dot{color:var(--accent)} .day.fly .dot{color:var(--sky)} .day.rest .dot{color:var(--moss)}
-.day-btn{width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;transition:border-color .2s, transform .15s}
+.day-btn{width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;transition:border-color .2s,transform .15s}
 .day-btn:hover{border-color:var(--muted)}
 .day-btn:active{transform:scale(.995)}
+.day.today .day-btn{border-color:var(--accent)}
 .day-date{font-family:var(--f-mono);font-size:12.5px;color:var(--muted)}
 .day-title{font-family:var(--f-display);font-size:20px;line-height:1.2;grid-column:1}
-.chev{grid-row:1/3;grid-column:2;transition:transform .25s;color:var(--muted)}
+.day-sum{grid-column:1;font-size:13.5px;color:var(--muted)}
+.chev{grid-row:1/4;grid-column:2;transition:transform .25s;color:var(--muted)}
 .day.open .chev{transform:rotate(180deg)}
 .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-left:8px;vertical-align:2px}
 .tag.trek{background:var(--accent-soft);color:var(--accent)}
 .tag.fly{background:color-mix(in srgb,var(--sky) 15%,transparent);color:var(--sky)}
 .tag.rest{background:var(--moss-soft);color:var(--moss)}
+.tag.now{background:var(--accent);color:var(--surface)}
 .day-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
 .day.open .day-body{grid-template-rows:1fr}
 .day-body > div{overflow:hidden}
-.day-inner{padding:12px 4px 4px}
-.day-inner ul{margin:0;padding-left:18px}
-.day-inner li{margin-bottom:4px}
-.stat-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.day-inner{padding:14px 2px 6px;display:grid;gap:16px}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px}
 .chip{font-size:12.5px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-family:var(--f-mono)}
+.sched{display:grid;gap:0;border-left:2px solid var(--line);margin-left:4px}
+.sr{display:grid;grid-template-columns:76px 1fr;gap:10px;padding:5px 0 5px 12px;font-size:14.5px;position:relative}
+.sr::before{content:"";position:absolute;left:-5px;top:12px;width:8px;height:8px;border-radius:50%;background:var(--surface);border:2px solid var(--muted)}
+.sr .tm{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);padding-top:2px}
+.blk h4{margin:0 0 6px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.blk ul{margin:0;padding-left:18px;font-size:14.5px}
+.blk li{margin-bottom:4px}
+.blk.how{background:var(--accent-soft);border-radius:12px;padding:12px 14px}
+.blk.how h4{color:var(--accent)}
+.carry{display:flex;flex-wrap:wrap;gap:6px}
+.carry span{font-size:13px;background:var(--moss-soft);color:var(--moss);border-radius:999px;padding:3px 10px;font-weight:600}
 .controls{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
 .btn{border:1px solid var(--line);background:var(--surface);padding:7px 14px;border-radius:999px;cursor:pointer;font-weight:600;font-size:13.5px;transition:background .2s,border-color .2s}
 .btn:hover{border-color:var(--ink)}
@@ -191,10 +248,9 @@ button{font:inherit;color:inherit}
 
 /* Flights */
 .legs{display:grid;gap:14px}
-.leg{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
 .leg-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px}
 .route{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px}
-.ap b{display:block;font-family:var(--f-mono);font-size:28px;line-height:1}
+.ap b{display:block;font-family:var(--f-mono);font-size:26px;line-height:1}
 .ap span{font-size:12.5px;color:var(--muted)}
 .ap.r{text-align:right}
 .track{position:relative;height:24px}
@@ -203,22 +259,19 @@ button{font:inherit;color:inherit}
 @keyframes fly{0%{left:4%}50%{left:96%}100%{left:4%}}
 .plane svg{display:block}
 .leg-rows{margin-top:14px;display:grid;gap:8px}
-.lr{display:grid;grid-template-columns:120px 1fr;gap:10px;font-size:14.5px;border-top:1px solid var(--line);padding-top:8px}
+.lr{display:grid;grid-template-columns:110px 1fr;gap:10px;font-size:14.5px;border-top:1px solid var(--line);padding-top:8px}
 .lr .k{color:var(--muted)}
-.lay{margin:4px 0 0;font-size:13.5px;color:var(--accent);font-weight:600}
-
-.calc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:18px;display:grid;gap:14px}
+.calc{display:grid;gap:14px}
 .calc-row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end}
-.field label{display:block;font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.field label{display:block;font-size:11.5px;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
 .stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;overflow:hidden}
 .stepper button{border:0;background:var(--bg);width:36px;height:36px;cursor:pointer;font-size:18px}
 .stepper output{min-width:40px;text-align:center;font-family:var(--f-mono);font-weight:700}
 .field input{font:inherit;font-family:var(--f-mono);padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);width:130px}
-.total{font-family:var(--f-display);font-size:34px;line-height:1}
-.total small{display:block;font-family:var(--f-body);font-size:13px;color:var(--muted);margin-top:4px}
+.total{font-family:var(--f-display);font-size:32px;line-height:1}
 
 /* Elevation */
-.elev{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 12px 8px;overflow-x:auto}
+.elev{padding:16px 12px 8px;overflow-x:auto}
 .elev svg{display:block;width:100%;min-width:560px;height:auto}
 .elev .grid line{stroke:var(--line)}
 .elev text{fill:var(--muted);font-family:var(--f-mono);font-size:11px}
@@ -235,9 +288,7 @@ button{font:inherit;color:inherit}
 .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);padding:0 6px 6px}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;border:2px solid var(--accent);margin-right:6px;vertical-align:-1px}
 .legend i.c{border-color:var(--moss)}
-
-.trekdays{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:18px}
-.td{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.trekdays{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
 .td .n{font-family:var(--f-mono);font-size:12px;color:var(--accent);font-weight:700}
 .td h3{font-size:18px;margin:2px 0 6px}
 .td p{margin:0;font-size:14px;color:var(--muted)}
@@ -246,43 +297,48 @@ button{font:inherit;color:inherit}
 @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 
 /* Checklists */
-.prog{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.bar{flex:1;height:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-.bar span{display:block;height:100%;width:0;background:var(--moss);transition:width .4s ease}
+.prog{display:flex;align-items:center;gap:12px}
+.prog .bar{flex:1;height:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.prog .bar span{display:block;height:100%;width:0;background:var(--moss);transition:width .4s ease}
 .prog .mono{font-size:13px;color:var(--muted);min-width:60px;text-align:right}
 .groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-.group{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
-.group h3{font-size:18px;margin-bottom:8px}
-.check{display:flex;gap:10px;align-items:flex-start;padding:6px 0;cursor:pointer;border-top:1px solid var(--line)}
+.group h3{font-size:18px;margin-bottom:2px}
+.group .gsub{font-size:13px;color:var(--muted);margin:0 0 8px}
+.check{display:flex;gap:10px;align-items:flex-start;padding:7px 0;cursor:pointer;border-top:1px solid var(--line)}
 .check:first-of-type{border-top:0}
 .check input{appearance:none;width:20px;height:20px;border:2px solid var(--muted);border-radius:6px;flex:none;margin-top:1px;display:grid;place-items:center;cursor:pointer;transition:background .15s,border-color .15s}
 .check input:checked{background:var(--moss);border-color:var(--moss)}
 .check input:checked::after{content:"";width:5px;height:10px;border:solid var(--surface);border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px);animation:pop .2s ease}
 @keyframes pop{from{transform:rotate(45deg) scale(.3)}to{transform:rotate(45deg) scale(1)}}
-.check span{transition:color .2s}
+.check span{transition:color .2s;font-size:14.5px}
 .check input:checked + span{color:var(--muted);text-decoration:line-through}
-.check small{display:block;color:var(--muted);font-size:12.5px;text-decoration:none}
+.check small{display:block;color:var(--muted);font-size:12.5px}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120px);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px;transition:transform .35s ease;z-index:20}
+.toast:empty{visibility:hidden}
 .toast.show{transform:translate(-50%,0)}
 
-/* Tips */
-.tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
-.tip{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
-.tip h3{font-size:18px;margin-bottom:4px}
-.tip p{margin:0;font-size:14.5px;color:var(--muted)}
-.phrases{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.ph{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:center;padding:10px 16px;border-top:1px solid var(--line);font-size:14.5px}
+/* Reference */
+.jump{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.jump button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.jump button:hover{border-color:var(--ink)}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.note h3{font-size:18px;margin-bottom:6px}
+.note ul{margin:0;padding-left:18px;font-size:14.5px;color:var(--muted)}
+.note li{margin-bottom:4px}
+.note li b{color:var(--ink);font-weight:600}
+.ph{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);font-size:14.5px}
 .ph:first-child{border-top:0}
 .ph .es{font-weight:600}
 .ph .en{color:var(--muted)}
-.copy{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:4px 10px;font-size:12px;cursor:pointer}
-foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
+.foot{display:block;margin-top:28px;font-size:12.5px;color:var(--muted)}
+[id^="ref-"]{scroll-margin-top:80px}
 
 @media (max-width:560px){
   .lr{grid-template-columns:1fr}
   .ph{grid-template-columns:1fr auto}
-  .ph .en{grid-column:1}
   .ap b{font-size:22px}
+  .step span{font-size:11px}
+  .sr{grid-template-columns:64px 1fr}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -291,12 +347,11 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
 </head>
 <body>
 
-
 <div class="wrap">
   <header class="hero">
-    <div class="eyebrow">Dallas → Cusco · Nov 15 – 21, 2026</div>
+    <div class="eyebrow">Dallas → Cusco · Nov 15 – 21, 2026 · Vivek &amp; Meghna</div>
     <h1>Peru, and the <em>Inca Trail</em> to Machu Picchu</h1>
-    <p>Six nights: fly overnight to Cusco, one day to settle in at altitude, then four days on foot with Alpaca Expeditions ending at the Sun Gate.</p>
+    <p>Seven days: one long travel day, one day to adjust to Cusco’s altitude, four days walking the Inca Trail with Alpaca Expeditions, then home.</p>
     <svg class="ridge" viewBox="0 0 900 70" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0 62 L90 50 L150 56 L240 30 L300 40 L360 12 L420 34 L480 26 L560 52 L640 38 L700 46 L780 24 L840 40 L900 34"/>
       <path class="r2" d="M0 66 L120 58 L200 62 L280 46 L360 54 L440 44 L520 60 L600 50 L690 58 L770 44 L900 54"/>
@@ -313,209 +368,300 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
 
   <nav class="tabs" aria-label="Trip sections">
     <div class="tabs-in" role="tablist">
-      <button class="tab" role="tab" data-tab="overview" aria-selected="true">Overview</button>
-      <button class="tab" role="tab" data-tab="days" aria-selected="false">Day by day</button>
-      <button class="tab" role="tab" data-tab="flights" aria-selected="false">Flights &amp; cost</button>
-      <button class="tab" role="tab" data-tab="trek" aria-selected="false">Inca Trail</button>
-      <button class="tab" role="tab" data-tab="pack" aria-selected="false">Packing</button>
-      <button class="tab" role="tab" data-tab="todo" aria-selected="false">Before you go</button>
-      <button class="tab" role="tab" data-tab="tips" aria-selected="false">Tips</button>
+      <button class="tab" role="tab" data-tab="plan" aria-selected="true">Plan</button>
+      <button class="tab" role="tab" data-tab="prep" aria-selected="false">Prepare</button>
+      <button class="tab" role="tab" data-tab="days" aria-selected="false">Days</button>
+      <button class="tab" role="tab" data-tab="trail" aria-selected="false">Trail</button>
+      <button class="tab" role="tab" data-tab="ref" aria-selected="false">Reference</button>
     </div>
   </nav>
 
-  <!-- OVERVIEW -->
-  <section class="panel" id="overview" role="tabpanel">
-    <h2>At a glance</h2>
-    <p class="lede">The trip in four numbers, plus what to sort out before you go.</p>
-    <div class="facts">
-      <div class="fact"><div class="k">Depart</div><div class="v mono">Sun 4:25 PM</div><div class="s">Nov 15 · DFW</div></div>
-      <div class="fact"><div class="k">Land in Cusco</div><div class="v mono">Mon 8:45 AM</div><div class="s">Nov 16 · via ATL &amp; LIM</div></div>
-      <div class="fact"><div class="k">Trek</div><div class="v">4 days / 3 nights</div><div class="s">Nov 17 – 20 · group service</div></div>
-      <div class="fact"><div class="k">Home</div><div class="v mono">Sat 10:40 PM</div><div class="s">Nov 21 · leave Cusco 8:05 AM</div></div>
+  <!-- ===================== PLAN ===================== -->
+  <section class="panel" id="plan" role="tabpanel">
+    <div class="sec"><h2>The shape of the trip</h2><p>Tap a day for its full plan. Each day shows where you sleep and how high.</p></div>
+    <div class="card">
+      <div class="shape" id="shape"></div>
+      <div class="shape-key"><span><i style="background:var(--sky)"></i>Travel</span><span><i style="background:var(--moss)"></i>Cusco</span><span><i style="background:var(--accent)"></i>Inca Trail</span></div>
     </div>
-    <div class="booking">
-      <div class="booking-head"><div><div class="eyebrow">Alpaca Expeditions · Group service</div><h3>Inca Trail booking</h3></div><span class="chip" id="bkStatus">2 of 5 done</span></div>
+
+    <div class="sec"><h2>How it unfolds</h2><p>Three parts, each with a different goal.</p></div>
+    <div class="phases">
+      <article class="card phase">
+        <div class="when">Nov 15–16 · Arrive &amp; adapt</div>
+        <h3>Get there, get logistics done, rest</h3>
+        <p>An overnight flight lands you at 3,400 m with one day before the trek. That day holds three must-dos: Alpaca check-in, the balance payment and the 6 PM briefing.</p>
+        <div class="how"><b>Approach:</b> do the errands early, while you still have energy, then rest. Walk slowly and drink water steadily. An early night matters more than sightseeing.</div>
+      </article>
+      <article class="card phase">
+        <div class="when">Nov 17–20 · The trail</div>
+        <h3>Four days, 42 km, one big climb</h3>
+        <p>Porters carry the camp and your duffel, and you carry a daypack. Day 2 is the hard one, over 4,215 m. After that the trail drops into warmer cloud forest and the days get easier.</p>
+        <div class="how"><b>Approach:</b> slow, steady pace from the very first hour. Layer up and down often. Eat whenever food is offered, even if altitude dulls your appetite.</div>
+      </article>
+      <article class="card phase">
+        <div class="when">Nov 20–21 · Machu Picchu &amp; home</div>
+        <h3>Sunrise at the Sun Gate, back by night</h3>
+        <p>A 3:30 AM start, the citadel tour, the Vistadome train, Cusco around 8 PM, then a 6 AM departure for the airport.</p>
+        <div class="how"><b>Approach:</b> pack for the flight the night before the trek ends, so the last night is just keys, shower and sleep.</div>
+      </article>
+    </div>
+
+    <div class="sec"><h2>Next up</h2><p>The next unticked items from Prepare.</p></div>
+    <div class="card"><div class="next" id="nextUp"></div><button class="linkbtn" type="button" data-goto="prep">See everything to prepare →</button></div>
+
+    <div class="sec"><h2>Don’t get caught out</h2><p>The few things that can actually derail the trip.</p></div>
+    <div class="card heads">
+      <div class="hd"><div><b>Original passports, every step</b><span>Alpaca check-in and the KM 82 trailhead both check the passport your permit was issued under. Photocopies don’t count.</span></div></div>
+      <div class="hd"><div><b>Re-check your bags in Lima</b><span>Luggage can’t go straight through to Cusco. Collect it after immigration and check it in again, whatever your airline says.</span></div></div>
+      <div class="hd"><div><b>US dollar cash in perfect condition</b><span>For the Alpaca balance. Torn or worn bills get refused. Cards cost 5% extra.</span></div></div>
+      <div class="hd"><div><b>No plastic bottles on the trail</b><span>It’s a zero-plastic site. Bring reusable bottles, already filled for the first morning.</span></div></div>
+      <div class="hd info"><div><b>Altitude is the wildcard</b><span>Alpaca recommends 2 days in Cusco and you have 1. Go slow on the 16th and plan your altitude approach in advance.</span></div></div>
+    </div>
+
+    <div class="sec"><h2>Bookings</h2></div>
+    <div class="card booking">
+      <div class="booking-head"><div><div class="eyebrow">Alpaca Expeditions · group service</div><h3>Inca Trail 4D/3N · starts Tue Nov 17</h3></div><span class="chip" id="bkStatus">2 of 5 done</span></div>
       <ol class="steps" id="steps">
-        <li class="step" data-i="0"><button type="button" aria-label="Booking request sent"></button><span>Booked</span></li>
-        <li class="step" data-i="1"><button type="button" aria-label="Deposit received"></button><span>Deposit paid</span></li>
-        <li class="step" data-i="2"><button type="button" aria-label="Permits purchased"></button><span>Permits bought</span></li>
-        <li class="step" data-i="3"><button type="button" aria-label="Official confirmation received"></button><span>Confirmation email</span></li>
+        <li class="step" data-i="0"><button type="button" aria-label="Booked"></button><span>Booked</span></li>
+        <li class="step" data-i="1"><button type="button" aria-label="Deposit paid"></button><span>Deposit paid</span></li>
+        <li class="step" data-i="2"><button type="button" aria-label="Permits bought"></button><span>Permits bought</span></li>
+        <li class="step" data-i="3"><button type="button" aria-label="Confirmation email"></button><span>Confirmation email</span></li>
         <li class="step" data-i="4"><button type="button" aria-label="Checked in and balance paid"></button><span>Checked in &amp; paid</span></li>
       </ol>
-      <p style="margin:0;font-size:13px;color:var(--muted)">Tap a step when it happens. Alpaca sent the final confirmation on Nov 12, so you can tick the middle two.</p>
-      <div class="bk-grid">
-        <div><div class="k">Travelers</div><div class="v">Vivek &amp; Meghna</div></div>
-        <div><div class="k">Coordinator</div><div class="v">Melany, Alpaca Expeditions</div></div>
-        <div><div class="k">Start</div><div class="v">Tue Nov 17, 2026 · 4D/3N</div></div>
-        <div><div class="k">Rentals</div><div class="v">Black Diamond walking sticks (Meghna). Other rentals need 48 h notice.</div></div>
-        <div><div class="k">Included</div><div class="v">Machu Picchu Route 3-B (Nov 20) · Vistadome train back (Nov 20)</div></div>
-        <div><div class="k">Meals</div><div class="v">No beef or pork, both (registered)</div></div>
-        <div><div class="k">Luggage</div><div class="v">Free storage: hand extra bags to your guide at pickup</div></div>
-        <div><div class="k">Cancellations</div><div class="v">In writing to <span class="mono" style="font-size:13px">info@alpacaexpeditions.com</span><button class="mini" type="button" id="copyEmail">Copy</button></div></div>
-        <div><div class="k">Deposit</div><div class="v">$200 per person, paid · non-refundable</div></div>
-        <div><div class="k">Balance</div><div class="v">Pay at office check-in, Nov 16 · USD cash preferred (card +5%, PayPal +5.5%)</div></div>
-        <div><div class="k">Briefing</div><div class="v">Mon Nov 16, 6:00 PM at the office · bring a pen · get duffel bags</div></div>
-        <div style="grid-column:1/-1"><div class="k">Alpaca office</div><div class="v">Calle Heladeros 157, Offices 24–25, 2nd floor, near the Plaza de Armas. Look for a small black plaque with gold “ALPACA EXPEDITIONS” over the door. Open daily 9 AM–1 PM and 3–7 PM. <a href="https://www.google.com/maps/search/?api=1&amp;query=Calle+Heladeros+157+Cusco+Peru" target="_blank" rel="noopener">Open in Maps</a></div></div>
-        <div style="grid-column:1/-1"><div class="k">Emergency &amp; lost items</div>
-          <div class="contacts" id="contacts">
-            <div class="ct"><div class="n">Alpaca office<small>Cusco landline</small></div><span class="num">(084) 254278</span><button class="mini" type="button" data-copy="084254278">Copy</button></div>
-            <div class="ct"><div class="n">Raul, general manager<small>Emergencies, lost luggage or items</small></div><span class="num">+51 947 824 774</span><button class="mini" type="button" data-copy="+51947824774">Copy</button></div>
-            <div class="ct"><div class="n">Office manager</div><span class="num">+51 984 441 260</span><button class="mini" type="button" data-copy="+51984441260">Copy</button></div>
-            <div class="ct"><div class="n">Office manager (alt.)</div><span class="num">+51 917 320 007</span><button class="mini" type="button" data-copy="+51917320007">Copy</button></div>
-          </div></div>
+      <div class="kv">
+        <div><div class="k">Included</div><div class="v">Machu Picchu Route 3-B · Vistadome train back (Nov 20)</div></div>
+        <div><div class="k">Rentals</div><div class="v">Walking sticks for Meghna. Others need 48 h notice.</div></div>
+        <div><div class="k">Meals</div><div class="v">No beef or pork for either of you (registered)</div></div>
+        <div><div class="k">Coordinator</div><div class="v">Melany</div></div>
       </div>
     </div>
-    <h2 style="font-size:24px;margin:0 0 10px">Where you’re staying</h2>
-    <div class="stays">
-      <article class="stay">
-        <div><div class="eyebrow">Night 1 · Airbnb</div><h3>San Blas Loft Cozy Stay Near Main Square</h3><div class="who">Host: Hilda · 2 adults</div></div>
-        <div class="inout"><div><div class="k">Check-in</div><b>Mon 1:00 PM</b><span>Nov 16</span></div><div class="arrow">→</div><div class="r"><div class="k">Checkout</div><b>Tue 11:00 AM</b><span>Nov 17</span></div></div>
-        <div class="flag">You land at 8:45 AM and leave on the trek before dawn</div>
-        <ul>
-          <li>Ask Hilda about dropping bags before 1 PM, and how to leave the keys when you go out early on the 17th.</li>
-          <li>San Blas has narrow, stepped streets. Alpaca suggests agreeing the pickup spot directly with your guide.</li>
-        </ul>
+    <div class="stays" style="margin-top:12px">
+      <article class="card stay">
+        <div><div class="eyebrow">Night of Nov 16 · Airbnb</div><h3>San Blas Loft Cozy Stay Near Main Square</h3><div class="who">Host: Hilda</div></div>
+        <div class="inout"><div><div class="k">Check-in</div><b>Mon 1:00 PM</b></div><div class="arrow">→</div><div class="r"><div class="k">Checkout</div><b>Tue 11:00 AM</b></div></div>
+        <ul><li>You land at 8:45 AM, so ask about leaving bags early.</li><li>You leave before dawn on the 17th, so agree how to leave the keys.</li><li>San Blas streets are steep and stepped. Confirm the pickup spot with your guide.</li></ul>
       </article>
-      <article class="stay">
-        <div><div class="eyebrow">Night 5 · Airbnb</div><h3>Casona Santa Teresa</h3><div class="who">Host: Cinthya · historic center · 2 adults</div></div>
-        <div class="inout"><div><div class="k">Check-in</div><b>Fri 1:00 PM</b><span>Nov 20</span></div><div class="arrow">→</div><div class="r"><div class="k">Checkout</div><b>Sat 10:00 AM</b><span>Nov 21</span></div></div>
-        <div class="flag">Cinthya doesn’t live there and meets you with the keys</div>
-        <ul>
-          <li>You arrive by land with Alpaca around 8:00 PM, not by plane. Agree a meeting time with her.</li>
-          <li>You leave around 6 AM for the 8:05 AM flight, before checkout. Ask how to leave the keys.</li>
-          <li>Central location, so Alpaca’s drop-off should be easy.</li>
-        </ul>
+      <article class="card stay">
+        <div><div class="eyebrow">Night of Nov 20 · Airbnb</div><h3>Casona Santa Teresa</h3><div class="who">Host: Cinthya · historic center</div></div>
+        <div class="inout"><div><div class="k">Check-in</div><b>Fri 1:00 PM</b></div><div class="arrow">→</div><div class="r"><div class="k">Checkout</div><b>Sat 10:00 AM</b></div></div>
+        <ul><li>Cinthya meets you with the keys. You arrive around 8 PM with Alpaca.</li><li>You leave around 6 AM, so agree how to leave the keys.</li></ul>
       </article>
-    </div>
-    <div class="alerts">
-      <div class="alert warn"><div><b>Nov 16 is a full day in Cusco</b><p>After you land, check in at the Alpaca office with your original passport and pay the balance (office hours 9 AM–1 PM and 3–7 PM). Then come back at 6:00 PM for the trek briefing, where you get your duffel bags. Alpaca prefers the balance in US dollar cash in good condition; cards add 5% and PayPal adds 5.5%.</p></div></div>
-      <div class="alert warn"><div><b>Collect your bags in Lima</b><p>Checked luggage can't go straight through to Cusco. Pick it up in Lima after immigration and check it in again for the Cusco flight, even if your airline says otherwise.</p></div></div>
-      <div class="alert warn"><div><b>No plastic water bottles on the trail</b><p>The Inca Trail is a zero-plastic site. Bring steel bottles, hard canteens or a bladder, and fill them for the first morning: Alpaca's treated water starts at the first lunch.</p></div></div>
-      <div class="alert warn"><div><b>Alpaca recommends 2 days in Cusco. You have 1.</b><p>You land at about 3,400 m (11,150 ft) on the 16th and start hiking on the 17th, with the trail topping out at 4,215 m on day 2. Alpaca asked to be told in advance if you won't be in Cusco 2 days ahead, so let them know you arrive the 16th. Keep the 16th easy and plan your altitude approach ahead of time.</p></div></div>
-      <div class="alert warn"><div><b>Bring your original passport on the trek</b><p>Permits are issued under your name and passport number, and they're checked at the KM 82 trailhead. Use the same passports you booked with. A photocopy won't get you through. To enter Peru, a passport must be valid for 6+ months past your visit. If you renew before the trip, bring the old passport too: the trail rangers only need the one that matches the permit.</p></div></div>
-      <div class="alert info"><div><b>Late arrival, early exit on the 20th → 21st</b><p>Alpaca brings you back to Cusco around 8:00 PM, you meet Cinthya at Casona Santa Teresa for the keys, and you fly out at 8:05 AM. Ask Alpaca how you get your stored luggage back that evening, since their office closes at 7 PM.</p></div></div>
-      <div class="alert info"><div><b>Permits can't be refunded</b><p>Once Alpaca buys the permits they're 100% non-refundable and non-transferable. If you ever had to cancel, Alpaca will give you an official letter for a travel insurance claim.</p></div></div>
-      <div class="alert ok"><div><b>No time change</b><p>Peru stays on UTC−5 all year. After US clocks fall back on Nov 1, Cusco and Dallas are on the same clock.</p></div></div>
     </div>
   </section>
 
-  <!-- DAYS -->
+  <!-- ===================== PREPARE ===================== -->
+  <section class="panel" id="prep" role="tabpanel" hidden>
+    <div class="sec"><h2>What to do, and when</h2><p>Work top to bottom. Ticks save on this phone.</p></div>
+    <div class="prog" style="margin-bottom:14px"><div class="bar"><span id="prepBar"></span></div><span class="mono" id="prepCount">0 / 0</span></div>
+    <div class="groups" id="prepGroups"></div>
+
+    <div class="sec"><h2>Pack by where it goes</h2><p>On the trail your things live in three places. Packing by destination is what keeps the duffel under 7 kg and the daypack useful.</p></div>
+    <div class="card" style="display:grid;gap:12px;margin-bottom:14px">
+      <div><div class="eyebrow">Porter duffel · handed out at the briefing</div><h3 style="font-size:19px">7 kg limit, sleeping gear included</h3></div>
+      <div class="wbar" role="img" aria-label="7 kilogram limit: about 3 kilograms for a rented sleeping bag and air mattress, about 4 for everything else"><span class="a" style="width:43%">Sleeping bag + mat · 3 kg</span><span class="b" style="width:57%">Everything else · 4 kg</span></div>
+      <p class="muted" style="margin:0;font-size:14px">66 × 36 cm and not waterproof. Pack everything inside large plastic bags. You only see the duffel at camp each evening.</p>
+    </div>
+    <div class="prog" style="margin-bottom:14px"><div class="bar"><span id="packBar"></span></div><span class="mono" id="packCount">0 / 0</span></div>
+    <div class="groups" id="packGroups"></div>
+    <div class="controls" style="margin-top:14px"><button class="btn" id="packReset" type="button">Clear packing ticks</button></div>
+  </section>
+
+  <!-- ===================== DAYS ===================== -->
   <section class="panel" id="days" role="tabpanel" hidden>
-    <h2>Day by day</h2>
-    <p class="lede">Tap a day to open it.</p>
+    <div class="sec"><h2>Day by day</h2><p>Each day has its schedule, what to expect, how to approach it, and what to have on you. During the trip, today opens on its own.</p></div>
     <div class="controls">
-      <button class="btn" id="expandAll">Open all</button>
-      <button class="btn" id="collapseAll">Close all</button>
+      <button class="btn" id="expandAll" type="button">Open all</button>
+      <button class="btn" id="collapseAll" type="button">Close all</button>
     </div>
     <ol class="spine" id="spine"></ol>
   </section>
 
-  <!-- FLIGHTS -->
-  <section class="panel" id="flights" role="tabpanel" hidden>
-    <h2>Flights &amp; cost</h2>
-    <p class="lede">Times you gave me are filled in. Fill in the connecting times and flight numbers from your e-ticket in OneNote, or ask me to add them here.</p>
+  <!-- ===================== TRAIL ===================== -->
+  <section class="panel" id="trail" role="tabpanel" hidden>
+    <div class="sec"><h2>The Inca Trail profile</h2><p>About 42 km (26 mi) from KM 82 to Machu Picchu. Tap a point to see where you’ll be. Elevations are approximate.</p></div>
+    <div class="card elev">
+      <svg id="elevSvg" viewBox="0 0 720 300" role="img" aria-label="Elevation profile of the Inca Trail from KM 82 to Machu Picchu, peaking at Dead Woman's Pass at 4,215 metres"></svg>
+      <div class="legend"><span><i></i>Landmark / pass</span><span><i class="c"></i>Campsite</span></div>
+      <div class="readout" id="readout"></div>
+    </div>
+    <div class="sec"><h2>Effort by day</h2></div>
+    <div class="trekdays" id="trekdays"></div>
+
+    <div class="sec"><h2>How trail days work</h2><p>The rhythm is the same every day, and knowing it makes the trek easier.</p></div>
+    <div class="notes">
+      <div class="card note"><h3>The daily rhythm</h3><ul>
+        <li><b>Wake-up:</b> porters bring coca tea to your tent, then a basin of warm water to wash.</li>
+        <li><b>Hike</b> the morning in small groups at your own pace. The guide sets regroup points.</li>
+        <li><b>Lunch</b> is a hot meal, already set up when you arrive.</li>
+        <li><b>Afternoon hike</b>, then tea and snacks at camp.</li>
+        <li><b>Dinner</b> after dark, and most people are asleep by 8 or 9.</li></ul></div>
+      <div class="card note"><h3>Pace and the climb</h3><ul>
+        <li><b>Start slower than feels necessary.</b> Most people struggle on day 2 because they rushed day 1.</li>
+        <li><b>Small steps on the stone stairs,</b> a breathing rhythm, short stops standing up rather than long sit-downs.</li>
+        <li><b>Poles earn their keep downhill:</b> days 2–3 are thousands of uneven steps down.</li>
+        <li><b>Peel layers before you overheat,</b> and put one back on the moment you stop.</li></ul></div>
+      <div class="card note"><h3>Trail manners</h3><ul>
+        <li><b>Porters come first.</b> When you hear them behind you, step to the mountain side of the path and let them pass.</li>
+        <li><b>Pack out everything,</b> including tissues and wrappers.</li>
+        <li><b>Toilets are basic</b> squat toilets at camps and a few stops. Carry toilet paper, sanitizer and a small waste bag.</li>
+        <li>Learn your porters’ names. The thank-you on night 3 means more for it.</li></ul></div>
+      <div class="card note"><h3>Camp life</h3><ul>
+        <li><b>Nights are cold</b> at the first two camps, near freezing. Sleep in a dry base layer, hat and socks.</li>
+        <li><b>Keep a headlamp</b> and water bottle inside the tent.</li>
+        <li><b>Little or no phone signal.</b> This app works offline, so download maps and music beforehand too.</li>
+        <li>Wet things rarely dry in the mountains. Keep one set of clothes for camp only.</li></ul></div>
+      <div class="card note"><h3>At Machu Picchu</h3><ul>
+        <li><b>Use the restroom before you enter.</b> There are none inside the site.</li>
+        <li>Daypacks over about 25 L have to be checked at the gate (3–5 soles).</li>
+        <li>No food or single-use plastic inside. Eat before you go in.</li>
+        <li>Morning cloud often covers the Sun Gate view and lifts by mid-morning. The tour usually brings the classic view back.</li></ul></div>
+      <div class="card note"><h3>Tipping the crew</h3><ul>
+        <li>Given on the last night, in soles, usually pooled with your whole group.</li>
+        <li><b>Typical:</b> 80–100 soles per porter, about double for the chef.</li>
+        <li>The guide’s tip is up to your group.</li>
+        <li>Bring the soles from Cusco. There’s nowhere to get cash on the trail.</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ===================== REFERENCE ===================== -->
+  <section class="panel" id="ref" role="tabpanel" hidden>
+    <div class="sec"><h2>Reference</h2><p>Look things up here when you need them.</p></div>
+    <div class="jump" id="jump">
+      <button type="button" data-jump="ref-contacts">Contacts</button>
+      <button type="button" data-jump="ref-flights">Flights</button>
+      <button type="button" data-jump="ref-money">Money</button>
+      <button type="button" data-jump="ref-health">Altitude &amp; health</button>
+      <button type="button" data-jump="ref-cusco">Cusco</button>
+      <button type="button" data-jump="ref-home">Coming home</button>
+      <button type="button" data-jump="ref-spanish">Spanish</button>
+      <button type="button" data-jump="ref-cost">Cost</button>
+    </div>
+
+    <div class="sec" id="ref-contacts"><h2>Contacts &amp; Alpaca office</h2></div>
+    <div class="card" id="contacts">
+      <div class="ct"><div class="n">Raul, general manager<small>Emergencies, lost luggage or items</small></div><span class="num">+51 947 824 774</span><button class="mini" type="button" data-copy="+51947824774">Copy</button></div>
+      <div class="ct"><div class="n">Office manager</div><span class="num">+51 984 441 260</span><button class="mini" type="button" data-copy="+51984441260">Copy</button></div>
+      <div class="ct"><div class="n">Office manager (alt.)</div><span class="num">+51 917 320 007</span><button class="mini" type="button" data-copy="+51917320007">Copy</button></div>
+      <div class="ct"><div class="n">Alpaca office<small>Cusco landline</small></div><span class="num">(084) 254278</span><button class="mini" type="button" data-copy="084254278">Copy</button></div>
+      <div class="ct"><div class="n">Cancellations, in writing</div><span class="num">info@alpacaexpeditions.com</span><button class="mini" type="button" data-copy="info@alpacaexpeditions.com">Copy</button></div>
+    </div>
+    <div class="card kv" style="margin-top:12px">
+      <div class="wide"><div class="k">Alpaca office</div><div class="v">Calle Heladeros 157, Offices 24–25, 2nd floor, a short walk from the Plaza de Armas. Small black plaque with gold “ALPACA EXPEDITIONS” over the door. Open daily 9 AM–1 PM and 3–7 PM. <a href="https://www.google.com/maps/search/?api=1&amp;query=Calle+Heladeros+157+Cusco+Peru" target="_blank" rel="noopener">Open in Maps</a></div></div>
+      <div><div class="k">Deposit</div><div class="v">$200 per person, paid, non-refundable</div></div>
+      <div><div class="k">Permits</div><div class="v">Non-refundable, tied to your passports. Alpaca provides a letter for insurance claims.</div></div>
+      <div><div class="k">Luggage storage</div><div class="v">Free. Hand bags to your guide at pickup on the 17th.</div></div>
+    </div>
+
+    <div class="sec" id="ref-flights"><h2>Flights</h2><p>Add the connecting flight numbers from your e-ticket, or ask me to.</p></div>
     <div class="legs">
-      <article class="leg">
-        <div class="leg-head"><div><div class="eyebrow">Outbound · Sun Nov 15 → Mon Nov 16</div><h3 style="font-size:22px">Dallas to Cusco</h3></div><span class="chip">3 flights</span></div>
+      <article class="card">
+        <div class="leg-head"><div><div class="eyebrow">Outbound · Sun Nov 15 → Mon Nov 16</div><h3 style="font-size:20px">Dallas to Cusco</h3></div><span class="chip">3 flights</span></div>
         <div class="route">
           <div class="ap"><b>DFW</b><span>Dallas/Fort Worth</span></div>
           <div class="track"><div class="plane"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 15.5v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V8.5l-8 5v2l8-2.5V18l-2 1.5V21l3.5-1 3.5 1v-1.5L13 18v-5z" transform="rotate(90 12 12)"/></svg></div></div>
           <div class="ap r"><b>CUZ</b><span>Cusco</span></div>
         </div>
         <div class="leg-rows">
-          <div class="lr"><span class="k">DFW → ATL</span><span>Depart <b class="mono">4:25 PM CT</b>, Sun Nov 15</span></div>
-          <div class="lr"><span class="k">Atlanta</span><span>Layover <b class="mono">2 h 47 min</b><p class="lay">Leave time to change terminals for the international flight</p></span></div>
-          <div class="lr"><span class="k">ATL → LIM</span><span>Overnight to Lima, Jorge Chávez International · times on ticket</span></div>
-          <div class="lr"><span class="k">LIM → CUZ</span><span>Arrive <b class="mono">8:45 AM</b>, Mon Nov 16. You clear Peruvian immigration and customs in Lima, then <b>collect your bags and re-check them</b> for Cusco.</span></div>
+          <div class="lr"><span class="k">DFW → ATL</span><span>Depart <b class="mono">4:25 PM</b>, Sun Nov 15</span></div>
+          <div class="lr"><span class="k">Atlanta</span><span>Layover <b class="mono">2 h 47 min</b>. Allow time to reach the international gates.</span></div>
+          <div class="lr"><span class="k">ATL → LIM</span><span>Overnight to Lima (Jorge Chávez)</span></div>
+          <div class="lr"><span class="k">Lima</span><span>Immigration and customs, then <b>collect your bags and re-check them</b></span></div>
+          <div class="lr"><span class="k">LIM → CUZ</span><span>Arrive <b class="mono">8:45 AM</b>, Mon Nov 16</span></div>
         </div>
       </article>
-      <article class="leg">
-        <div class="leg-head"><div><div class="eyebrow">Return · Sat Nov 21</div><h3 style="font-size:22px">Cusco to Dallas</h3></div><span class="chip">same day</span></div>
+      <article class="card">
+        <div class="leg-head"><div><div class="eyebrow">Return · Sat Nov 21</div><h3 style="font-size:20px">Cusco to Dallas</h3></div><span class="chip">same day</span></div>
         <div class="route">
           <div class="ap"><b>CUZ</b><span>Cusco</span></div>
           <div class="track"><div class="plane" style="animation-delay:-2.5s"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 15.5v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V8.5l-8 5v2l8-2.5V18l-2 1.5V21l3.5-1 3.5 1v-1.5L13 18v-5z" transform="rotate(90 12 12)"/></svg></div></div>
           <div class="ap r"><b>DFW</b><span>Dallas/Fort Worth</span></div>
         </div>
         <div class="leg-rows">
-          <div class="lr"><span class="k">Depart Cusco</span><span><b class="mono">8:05 AM</b>, Sat Nov 21. Be at CUZ about 2 hours early.</span></div>
-          <div class="lr"><span class="k">Connections</span><span>See e-ticket</span></div>
-          <div class="lr"><span class="k">Arrive DFW</span><span><b class="mono">10:40 PM CT</b>, Sat Nov 21. US customs happens at your first US airport.</span></div>
+          <div class="lr"><span class="k">Depart</span><span><b class="mono">8:05 AM</b>. Be at the airport around 6:30.</span></div>
+          <div class="lr"><span class="k">Arrive</span><span><b class="mono">10:40 PM</b>, DFW. US customs at your first US airport.</span></div>
         </div>
       </article>
     </div>
 
-    <div class="calc">
-      <div class="eyebrow">Trip cost calculator</div>
+    <div class="sec" id="ref-money"><h2>Money</h2></div>
+    <div class="notes">
+      <div class="card note"><h3>What to carry</h3><ul>
+        <li><b>US dollars</b> for the Alpaca balance. Bills must be clean and untorn.</li>
+        <li><b>Soles</b> for small purchases, taxis, toilets (often 1 sol), bag storage and crew tips.</li>
+        <li><b>Cards</b> work at most Cusco restaurants and shops. Alpaca adds 5% for cards and 5.5% for PayPal.</li></ul></div>
+      <div class="card note"><h3>Getting cash</h3><ul>
+        <li><b>BCP bank,</b> Portal de Panes 177 on the main square: dollars or soles at the counter with a Visa card and passport (names must match). Mon–Fri 9 AM–5 PM, Sat 9 AM–noon.</li>
+        <li>ATMs are around the Plaza de Armas. Use ones inside banks, in daylight.</li>
+        <li>Banks give a lower USD-to-soles rate. Exchange houses near the plaza are usually better.</li></ul></div>
+      <div class="card note"><h3>Tipping in Cusco</h3><ul>
+        <li>Restaurants: around 10% if no service charge is on the bill.</li>
+        <li>Trek crew: see Trail → Tipping the crew.</li></ul></div>
+    </div>
+
+    <div class="sec" id="ref-health"><h2>Altitude &amp; health</h2></div>
+    <div class="notes">
+      <div class="card note"><h3>Altitude</h3><ul>
+        <li>Cusco sits at <b>3,400 m (11,150 ft)</b>. Expect breathlessness on stairs, a mild headache and broken sleep the first night.</li>
+        <li>Move slowly, drink steadily, skip alcohol on the 16th and eat light. Coca tea is everywhere.</li>
+        <li>Nights 2–3 on the trail are lower than Cusco, and Machu Picchu is lower still (2,430 m), so it gets easier as you go.</li>
+        <li>If you’re using medication for altitude, follow the plan you set before the trip.</li></ul></div>
+      <div class="card note"><h3>Sun, cold, rain</h3><ul>
+        <li><b>UV is intense</b> at altitude, even under cloud. Wear sunscreen, lip balm and a hat every day.</li>
+        <li>November is the start of the rainy season: clearer mornings, afternoon showers, near-freezing nights at the high camps.</li>
+        <li>Days 3–4 drop into warm, humid cloud forest, so wear insect repellent there.</li></ul></div>
+      <div class="card note"><h3>Food &amp; water</h3><ul>
+        <li>Don’t drink tap water or have ice from unknown sources. Bottled or filtered water only.</li>
+        <li>Before the trek, avoid ceviche, guinea pig and barbecue. Celebrate with them afterwards.</li>
+        <li>On the trail, Alpaca boils and filters all drinking water from the first lunch onwards.</li>
+        <li>The CDC doesn’t generally recommend yellow fever vaccine for trips limited to Cusco, Machu Picchu and the Inca Trail. Check your routine and Hep A vaccines.</li></ul></div>
+    </div>
+
+    <div class="sec" id="ref-cusco"><h2>Cusco</h2></div>
+    <div class="notes">
+      <div class="card note"><h3>Getting around</h3><ul>
+        <li>The historic center is compact and walkable, but steep. <b>San Blas is uphill</b> from the plaza, so take a taxi with luggage.</li>
+        <li>Use taxis your host or a restaurant calls, or a ride app. Agree the fare before getting into a street taxi.</li>
+        <li>The airport is about 20–30 minutes from the center.</li></ul></div>
+      <div class="card note"><h3>Staying sharp</h3><ul>
+        <li>Pickpockets work the markets and plaza crowds. Keep your phone in a front pocket.</li>
+        <li>Street sellers and tour touts are persistent. A polite “no, gracias” and keep walking.</li>
+        <li>Peru stays on UTC−5: the same clock as Dallas in November.</li></ul></div>
+      <div class="card note"><h3>Phone &amp; power</h3><ul>
+        <li>Get an eSIM or international plan before you fly. Expect little to no signal on the trail.</li>
+        <li>Outlets are 220 V and usually take US two-prong plugs. Phone and laptop chargers handle the voltage; hair tools may not.</li>
+        <li>No charging on the trail, so bring a battery pack.</li></ul></div>
+    </div>
+
+    <div class="sec" id="ref-home"><h2>Coming home</h2></div>
+    <div class="notes">
+      <div class="card note"><h3>US customs</h3><ul>
+        <li><b>Don’t bring coca leaves, tea or candy home.</b> Coca products are illegal to bring into the US, even as souvenirs.</li>
+        <li>Declare any food, plant or animal products, such as dried fruit, seeds or alpaca items, on the customs form.</li></ul></div>
+      <div class="card note"><h3>The last morning</h3><ul>
+        <li>Leave Casona Santa Teresa around 6 AM for the 8:05 AM flight.</li>
+        <li>Pack the night before. Keep passports, phone and chargers in one pocket of your carry-on.</li></ul></div>
+    </div>
+
+    <div class="sec" id="ref-spanish"><h2>Useful Spanish</h2></div>
+    <div class="card" id="phrases"></div>
+
+    <div class="sec" id="ref-cost"><h2>Trip cost</h2></div>
+    <div class="card calc">
       <div class="calc-row">
         <div class="field"><label for="pax">Travelers</label>
-          <div class="stepper"><button id="paxMinus" aria-label="Fewer travelers">−</button><output id="pax">2</output><button id="paxPlus" aria-label="More travelers">+</button></div>
+          <div class="stepper"><button id="paxMinus" type="button" aria-label="Fewer travelers">−</button><output id="pax">2</output><button id="paxPlus" type="button" aria-label="More travelers">+</button></div>
         </div>
         <div class="field"><label for="air">Airfare / person ($)</label><input id="air" type="number" min="0" value="1860"></div>
         <div class="field"><label for="tour">Alpaca tour / person ($)</label><input id="tour" type="number" min="0" placeholder="from receipt"></div>
-        <div class="field"><label for="dep">Alpaca deposit paid ($)</label><input id="dep" type="number" min="0" value="400"></div>
-        <div class="field"><label for="hotel">Hotels total ($)</label><input id="hotel" type="number" min="0" placeholder="0"></div>
+        <div class="field"><label for="dep">Deposit paid ($)</label><input id="dep" type="number" min="0" value="400"></div>
+        <div class="field"><label for="hotel">Stays total ($)</label><input id="hotel" type="number" min="0" placeholder="0"></div>
       </div>
-      <div><div class="total mono" id="total">$3,720</div><small id="totalNote" style="color:var(--muted)">Airfare only so far. Add the tour price and hotels to see the full total.</small></div>
-      <div id="balBox" hidden style="border-top:1px solid var(--line);padding-top:12px"><div class="eyebrow">Still owed to Alpaca · pay at check-in, Nov 16</div><div class="total mono" id="bal" style="font-size:26px;margin-top:4px">$0</div></div>
+      <div><div class="total mono" id="total">$3,720</div><small id="totalNote" class="muted">Airfare only so far. Add the tour price and stays to see the full total.</small></div>
+      <div id="balBox" hidden style="border-top:1px solid var(--line);padding-top:12px"><div class="eyebrow">Still owed to Alpaca · pay at check-in, Nov 16</div><div class="total mono" id="bal" style="font-size:24px;margin-top:4px">$0</div></div>
     </div>
-  </section>
 
-  <!-- TREK -->
-  <section class="panel" id="trek" role="tabpanel" hidden>
-    <h2>Inca Trail profile</h2>
-    <p class="lede">About 42 km (26 mi) from KM 82 to Machu Picchu. Tap or hover a point to see where you'll be. Elevations are approximate.</p>
-    <div class="elev">
-      <svg id="elevSvg" viewBox="0 0 720 300" role="img" aria-label="Elevation profile of the Inca Trail from KM 82 to Machu Picchu, peaking at Dead Woman's Pass at 4,215 metres"></svg>
-      <div class="legend"><span><i></i>Landmark / pass</span><span><i class="c"></i>Campsite</span></div>
-      <div class="readout" id="readout"><b>Dead Woman's Pass</b> · <span class="mono">4,215 m / 13,829 ft</span><br><span style="color:var(--muted)">Highest point of the trek, on the morning of day 2.</span></div>
-    </div>
-    <div class="trekdays" id="trekdays"></div>
-    <div class="duffel">
-      <div><div class="eyebrow">Porter duffel · given out at the briefing</div><h3>7 kg limit, sleeping gear included</h3></div>
-      <div class="wbar" role="img" aria-label="7 kilogram limit: 3 kilograms for a rented sleeping bag and air mattress, 4 kilograms for everything else"><span class="a" style="width:43%">Sleeping bag + mat · 3 kg</span><span class="b" style="width:57%">Your things · 4 kg</span></div>
-      <ul>
-        <li>The bag is 66 × 36 cm (2 × 1 ft) and not waterproof. Pack everything inside large plastic bags, and bring spares for wet or dirty clothes.</li>
-        <li>You won’t see it again until camp each night. Keep water, snacks, rain layers, fleece, hat, sunscreen and toilet paper in your daypack (~25 L).</li>
-        <li>Alpaca hands out ponchos and backpack covers at the briefing. Give the ponchos back after the hike.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- PACKING -->
-  <section class="panel" id="pack" role="tabpanel" hidden>
-    <h2>Packing list</h2>
-    <p class="lede">Checks save in this browser. On the trek, porters carry a small duffel for you; check the weight limit on your Alpaca info sheet and leave the rest at your Cusco hotel.</p>
-    <div class="prog"><div class="bar"><span id="packBar"></span></div><span class="mono" id="packCount">0 / 0</span></div>
-    <div class="controls"><button class="btn" id="packReset">Clear checks</button></div>
-    <div class="groups" id="packGroups"></div>
-  </section>
-
-  <!-- TODO -->
-  <section class="panel" id="todo" role="tabpanel" hidden>
-    <h2>Before you go</h2>
-    <p class="lede">Things to book or confirm in the next few weeks.</p>
-    <div class="prog"><div class="bar"><span id="todoBar"></span></div><span class="mono" id="todoCount">0 / 0</span></div>
-    <div class="groups" id="todoGroups"></div>
-  </section>
-
-  <!-- TIPS -->
-  <section class="panel" id="tips" role="tabpanel" hidden>
-    <h2>Good to know</h2>
-    <p class="lede">Short notes for Cusco and the trail.</p>
-    <div class="tips">
-      <div class="tip"><h3>Altitude</h3><p>Go slow on the 16th, hydrate, skip alcohol, eat light. Coca tea is everywhere in Cusco. If you plan to use acetazolamide, start it on your usual schedule before arrival rather than once symptoms begin.</p></div>
-      <div class="tip"><h3>Weather</h3><p>November is the start of the rainy season. Expect sun, cloud and showers in the same day, warm cloud forest on days 3–4, and near-freezing nights at the high camps.</p></div>
-      <div class="tip"><h3>Money</h3><p>Peru uses the sol (PEN). Bring clean, untorn bills; damaged ones get refused. Alpaca takes its balance in US dollars. Carry small soles for snacks, toilets on the trail and tipping the porters and cook on the last evening. Cards work in Cusco restaurants and hotels.</p></div>
-      <div class="tip"><h3>Power</h3><p>Peru runs on 220 V. Phone and laptop chargers usually handle it; check anything with a heating element. Bring a battery pack, since campsites have no outlets.</p></div>
-      <div class="tip"><h3>Water</h3><p>Don't drink tap water. Alpaca supplies boiled, filtered water from the first lunch through the last breakfast. Bring your own for the first morning, in reusable bottles: plastic ones aren’t allowed on the trail.</p></div>
-      <div class="tip"><h3>Day 4 lunch</h3><p>Your guide picks a restaurant in Aguas Calientes for an optional celebration lunch. If you skip it, collect your train tickets from the guide first.</p></div>
-      <div class="tip"><h3>Tipping</h3><p>Customary at the end of the trek, in soles. Groups usually pool tips: about 80–100 soles per porter, double for the chef. The guide’s tip is up to each group.</p></div>
-      <div class="tip"><h3>Cash in Cusco</h3><p>BCP bank, Portal de Panes 177 on the main square. US dollars or soles over the counter with a Visa card and your passport (names must match). Mon–Fri 9 AM–5 PM, Sat 9 AM–noon.</p></div>
-      <div class="tip"><h3>Before the trek</h3><p>Rest, walk the city, drink coca tea. Skip rafting, zip lining, biking and horse riding, and save heavy local food for after the trek.</p></div>
-    </div>
-    <div class="phrases" id="phrases"></div>
-    <p style="margin-top:22px"><button class="btn" id="lockApp" type="button">Lock app on this device</button> <span style="color:var(--muted);font-size:13px">Forgets the password here. You'll need it again to open the app.</span></p>
-    <span class="foot">Sources: Alpaca Expeditions Inca Trail 4D/3N itinerary pages; Peru entry guides for U.S. travelers (2026). Confirm details with your Alpaca briefing and tickets.</span>
+    <p style="margin-top:26px"><button class="btn" id="lockApp" type="button">Lock app on this device</button> <span class="muted" style="font-size:13px">Forgets the password here. You’ll need it again to open the app.</span></p>
+    <span class="foot">Based on Alpaca Expeditions’ booking and pre-trek emails (Oct 24 and Nov 12, 2026) and general Inca Trail guidance. Your guide’s briefing has the final word.</span>
   </section>
 </div>
 <div class="toast" id="toast" role="status"></div>
@@ -528,26 +674,86 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
   };
   const $ = s => document.querySelector(s);
   const toast = msg => {const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),1600)};
+  const copy = t => navigator.clipboard?.writeText(t).then(()=>toast('Copied'),()=>toast(t)) ?? toast(t);
 
-  /* Tabs */
+  /* ---------- Data ---------- */
+  const days=[
+    {date:'Sun Nov 15',iso:'2026-11-15',wd:'Sun',dn:15,type:'fly',short:'Fly',sleep:'On the plane',alt:0,
+     title:'Fly overnight to Peru',sum:'Afternoon departure, overnight to Lima.',
+     chips:['DFW 4:25 PM','ATL 2h 47m'],
+     sched:[['4:25 PM','Depart DFW for Atlanta'],['Evening','2 h 47 min layover in ATL'],['Overnight','ATL → Lima']],
+     expect:['A long, broken night. You may get only a few hours of sleep.','Lima immigration happens early next morning, before your Cusco flight.'],
+     approach:['Sleep as much as you can on the Lima flight; tomorrow is a full day at altitude.','Hydrate on the plane and go easy on alcohol.','Wear or carry on your hiking boots. They’re the one thing you can’t replace in Cusco.'],
+     carry:['Passports','Meds','Warm layer','Boots','Phone + charger']},
+    {date:'Mon Nov 16',iso:'2026-11-16',wd:'Mon',dn:16,type:'rest',short:'Cusco',sleep:'San Blas Loft',alt:3400,
+     title:'Arrive Cusco: check-in, cash, briefing',sum:'Land 8:45 AM. Alpaca check-in, then the 6 PM briefing.',
+     chips:['CUZ 8:45 AM','Airbnb 1 PM','Briefing 6 PM','3,400 m'],
+     sched:[['Early','Lima: immigration, collect bags, re-check for Cusco'],['8:45 AM','Land in Cusco, taxi to the center'],['By 1 PM','Alpaca office check-in: passports + balance'],['Midday','Light lunch, cash from BCP if needed'],['1:00 PM','Check in at the San Blas Loft (Hilda), rest'],['6:00 PM','Briefing at the Alpaca office, collect duffels'],['Evening','Pack duffel and daypack, early night']],
+     expect:['Altitude hits on arrival: breathlessness on stairs, maybe a headache. Normal.','The briefing covers the route, wake-up times and gear, and you meet your group.','You’ll get duffel bags, ponchos and backpack covers at the briefing.'],
+     approach:['Do the Alpaca check-in in the morning window, before fatigue sets in.','Take a taxi up to San Blas with luggage. Walking it on arrival day is hard work.','Ask your guide at the briefing exactly where the San Blas pickup will be.','Sort out the key drop-off with Hilda before bed. You leave before she’s up.'],
+     carry:['Original passports','USD cash','Pen + notepad','Water']},
+    {date:'Tue Nov 17',iso:'2026-11-17',wd:'Tue',dn:17,type:'trek',short:'Trek 1',sleep:'Ayapata camp',alt:3300,
+     title:'Trek day 1 · KM 82 to Ayapata',sum:'14 km warm-up day past Llactapata.',
+     chips:['14 km','6–7 h','Moderate'],
+     sched:[['Pre-dawn','Pickup in San Blas; hand extra luggage to the guide'],['Morning','Drive to KM 82, passport checkpoint, start walking'],['Midday','Lunch on the trail (Alpaca water starts here)'],['Afternoon','Past Llactapata, gentle climb to Ayapata camp']],
+     expect:['A gentle start along the Urubamba valley, with dry, sunny stretches.','The passport check at KM 82 is the official start. Permits are matched to your passport.','Camp is set up when you arrive. Tea, snacks, then dinner.'],
+     approach:['Fill your bottles before pickup. There’s no treated water until lunch.','Walk slower than feels necessary today. It pays off on day 2.','Get to know your guide and group; you’ll pace with them tomorrow.'],
+     carry:['Passport','Filled bottles','Sunscreen','Rain layer','Snacks']},
+    {date:'Wed Nov 18',iso:'2026-11-18',wd:'Wed',dn:18,type:'trek',short:'Trek 2',sleep:'Chaquicocha camp',alt:3600,
+     title:'Trek day 2 · Dead Woman’s Pass',sum:'The hardest day: two passes, high point 4,215 m.',
+     chips:['High point 4,215 m','Hardest day'],
+     sched:[['Early','Coca tea at the tent, breakfast'],['Morning','Long climb to Dead Woman’s Pass (4,215 m)'],['Midday','Steep stone-step descent to Pacaymayo, lunch'],['Afternoon','Climb past Runkurakay to the second pass, on to Chaquicocha']],
+     expect:['A sustained climb on uneven Inca stairs. Breathing gets hard near the top.','Cold and windy at the pass. You go from sweating to chilled within minutes.','The descents are hard on the knees.'],
+     approach:['Small steps, steady breathing, short standing breaks.','Put a layer on at the pass before you cool down.','Use poles on every descent.','Keep eating at breaks even without appetite.'],
+     carry:['Warm layer','Hat + gloves','Rain layer','Poles','Snacks','Sunscreen']},
+    {date:'Thu Nov 19',iso:'2026-11-19',wd:'Thu',dn:19,type:'trek',short:'Trek 3',sleep:'Wiñay Wayna camp',alt:2650,
+     title:'Trek day 3 · Cloud forest to Wiñay Wayna',sum:'Often called the most beautiful day, mostly downhill.',
+     chips:['10 km','~5 h','Mostly downhill'],
+     sched:[['~6:30 AM','Wake-up, breakfast'],['Morning','Cloud forest, Inca tunnels, Phuyupatamarca'],['Afternoon','Long descent to Wiñay Wayna camp, visit the ruins'],['Evening','Thank-you ceremony and tips for porters and chef']],
+     expect:['The landscape turns lush and humid, with orchids and mist. Insects appear.','Lots of steep downhill stairs. Your legs will feel it.','Camp is lower and warmer. Many people sleep best this night.'],
+     approach:['Take your time; this is the day for photos.','Use poles and step down carefully on wet stone.','Have tip money ready in soles before the evening ceremony.','Go to bed early. Tomorrow starts at 3:30 AM.'],
+     carry:['Insect repellent','Poles','Camera','Soles for tips']},
+    {date:'Fri Nov 20',iso:'2026-11-20',wd:'Fri',dn:20,type:'trek',short:'Machu Picchu',sleep:'Casona Santa Teresa',alt:3400,
+     title:'Trek day 4 · Sun Gate, Machu Picchu, back to Cusco',sum:'3:30 AM start, sunrise at the Sun Gate, train home.',
+     chips:['Wake 3:30 AM','Route 3-B','Vistadome','Cusco ~8 PM'],
+     sched:[['3:30 AM','Wake-up; porters leave early for their train'],['~5:30 AM','Final checkpoint opens; hike to the Sun Gate'],['Morning','Guided tour of Machu Picchu (Route 3-B)'],['Midday','Bus to Aguas Calientes, optional lunch with your guide'],['Afternoon','Vistadome train and transfer to Cusco'],['~8:00 PM','Drop-off at Casona Santa Teresa; meet Cinthya for keys']],
+     expect:['A wait in the dark at the checkpoint. Bring a warm layer and a headlamp.','The Sun Gate may be clouded in. It usually clears by mid-morning.','A long day. You’ll be tired and happy by the time you reach Cusco.'],
+     approach:['Use the restroom before you enter Machu Picchu. There are none inside.','Get your train tickets from the guide before you split up.','Ask Alpaca at the briefing how your stored luggage gets back to you tonight.','Repack for the flight tonight, before you sleep.'],
+     carry:['Passport','Headlamp','Warm layer','Soles','Train ticket']},
+    {date:'Sat Nov 21',iso:'2026-11-21',wd:'Sat',dn:21,type:'fly',short:'Home',sleep:'Home',alt:0,
+     title:'Fly home',sum:'6 AM departure, home late evening.',
+     chips:['Leave ~6 AM','CUZ 8:05 AM','DFW 10:40 PM'],
+     sched:[['~6:00 AM','Leave Casona Santa Teresa; keys as Cinthya asked'],['8:05 AM','Depart Cusco'],['10:40 PM','Land at DFW']],
+     expect:['Cusco’s airport is small. Morning flights can be delayed by weather.','US customs at your first US airport.'],
+     approach:['Leave any coca tea or candy behind. It isn’t allowed into the US.','Keep passports and phone in one pocket all morning.'],
+     carry:['Passports','Phone','Chargers']}
+  ];
+
+  /* ---------- Tabs ---------- */
   const tabs=[...document.querySelectorAll('.tab')];
   function show(id){
+    if(!document.getElementById(id)) id='plan';
     tabs.forEach(t=>t.setAttribute('aria-selected',t.dataset.tab===id));
     document.querySelectorAll('.panel').forEach(p=>{p.hidden=p.id!==id});
-    store.set('peru.tab',id);
+    store.set('peru.tab2',id);
   }
-  tabs.forEach(t=>t.addEventListener('click',()=>show(t.dataset.tab)));
-  const initial = (location.hash||'').slice(1);
-  show(document.getElementById(initial)?.classList.contains('panel') ? initial : store.get('peru.tab','overview'));
+  tabs.forEach(t=>t.addEventListener('click',()=>{show(t.dataset.tab);window.scrollTo({top:document.querySelector('.tabs').offsetTop-4,behavior:'smooth'})}));
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-goto]');if(b){show(b.dataset.goto);window.scrollTo({top:document.querySelector('.tabs').offsetTop-4,behavior:'smooth'})}});
+  const hash=(location.hash||'').slice(1);
+  show(document.getElementById(hash)?.classList.contains('panel')?hash:store.get('peru.tab2','plan'));
 
-  /* Countdown: Nov 15 2026 4:25 PM CST (UTC-6, DST ended Nov 1) */
-  const dep = new Date('2026-11-15T16:25:00-06:00').getTime();
-  const ret = new Date('2026-11-21T22:40:00-06:00').getTime();
+  /* ---------- Today ---------- */
+  const todayIso=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')})();
+  const todayIdx=days.findIndex(d=>d.iso===todayIso);
+
+  /* ---------- Countdown ---------- */
+  const dep=new Date('2026-11-15T16:25:00-06:00').getTime();
+  const ret=new Date('2026-11-21T22:40:00-06:00').getTime();
   function tick(){
     const now=Date.now(); let diff=dep-now;
     if(diff<=0){
-      $('#cd-label').textContent = now<ret ? 'You’re on the trip. Buen viaje.' : 'Welcome home.';
-      ['d','h','m','s'].forEach(k=>$('#cd-'+k).textContent='00');return;
+      $('#cd-label').textContent = now<ret ? (todayIdx>=0?`Day ${todayIdx+1} of 7 · ${days[todayIdx].title}`:'You’re on the trip. Buen viaje.') : 'Welcome home.';
+      $('#countdown').querySelectorAll('.cd').forEach(c=>c.hidden=true);return;
     }
     const d=Math.floor(diff/864e5);diff-=d*864e5;
     const h=Math.floor(diff/36e5);diff-=h*36e5;
@@ -558,59 +764,119 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
   }
   tick();setInterval(tick,1000);
 
-  /* Day by day */
-  const days=[
-    {date:'Sun Nov 15',type:'fly',title:'Fly overnight to Peru',chips:['DFW 4:25 PM','ATL layover 2h 47m'],items:['Depart DFW 4:25 PM for Atlanta.','2 h 47 min layover in ATL, then the overnight flight to Lima.','Wear trail shoes or carry them on, and keep passport, meds and a warm layer in your carry-on.']},
-    {date:'Mon Nov 16',type:'rest',title:'Arrive Cusco, check in with Alpaca, briefing',chips:['CUZ 8:45 AM','Alpaca check-in','Airbnb 1 PM','Briefing 6 PM'],items:['Clear immigration in Lima, collect your bags and re-check them, then fly to Cusco. Land 8:45 AM.','Check in at the Alpaca office (open 9 AM–1 PM): bring your original passports and the balance, ideally in US dollar cash in good condition. Ask about leaving bags if Hilda can’t take them early.','Need cash? BCP bank on the main square (Portal de Panes 177) gives US dollars over the counter with your passport and a Visa card. Open 9 AM–5 PM.','Eat light: skip guinea pig, ceviche and barbecue until after the trek.','1:00 PM: check in at the San Blas Loft (host Hilda). Rest and hydrate.','6:00 PM: trek briefing at the office with your guide and group. Bring a pen and notepad. You get your duffel bags, ponchos and backpack covers here.','Pack the duffel for the porters (7 kg max, in plastic bags; you won’t see it until camp) and keep daytime things in your daypack. Extra luggage goes to your guide at pickup.','Early night. Pickup on the 17th is very early, so sort out key drop-off with Hilda tonight.']},
-    {date:'Tue Nov 17',type:'trek',title:'Trek day 1 · KM 82 to Ayapata',chips:['14 km','6–7 h','Moderate'],items:['Pickup from the San Blas Loft, or the spot you agreed with your guide. Hand your extra luggage to the guide; Alpaca stores it free.','Leave the keys as Hilda asked (checkout is 11 AM, long after you’ve gone).','Bring filled water bottles: treated water starts at lunch.','Drive to KM 82 (Piskacucho).','Passport check at the trailhead checkpoint.','Hike past the Inca site of Llactapata to camp at Ayapata.','A warm-up day to get used to the trail.','Meals: your no-beef, no-pork request is on file for both of you.']},
-    {date:'Wed Nov 18',type:'trek',title:'Trek day 2 · Dead Woman’s Pass',chips:['High point 4,215 m','Hardest day'],items:['Early wake-up with coca tea from the porters.','Long climb to Dead Woman’s Pass (Warmiwañusca), the highest point of the trail.','Descend to Pacaymayo, climb again past Runkurakay, then on to camp at Chaquicocha.','You’ll have done both big passes by evening.']},
-    {date:'Thu Nov 19',type:'trek',title:'Trek day 3 · Cloud forest to Wiñay Wayna',chips:['10 km','~5 h','Mostly downhill'],items:['Wake around 6:30 AM. Often called the most beautiful day of the trail.','Cloud forest, Inca tunnels and Phuyupatamarca.','Camp near Wiñay Wayna and walk over to see the ruins.','Evening thank-you with the porters and chef; this is when tips are given, usually pooled in soles with the whole group.']},
-    {date:'Fri Nov 20',type:'trek',title:'Trek day 4 · Sun Gate and Machu Picchu',chips:['Wake 3:30 AM','Sun Gate','Vistadome train','Cusco ~8 PM'],items:['Very early start to queue at the final checkpoint.','Walk to the Sun Gate (Inti Punku) for the first view of Machu Picchu.','Guided tour of the citadel on Route 3-B, then free time. A bigger daypack than ~25 L has to be checked at the gate (3–5 soles).','Get your train tickets from your guide before you split up.','Bus down to Aguas Calientes. Optional last lunch with your guide at a restaurant they pick, then the Vistadome train and transfer back to Cusco.','Back in Cusco around 8:00 PM. Drop-off at Casona Santa Teresa, meet Cinthya for the keys, and collect your stored luggage.']},
-    {date:'Sat Nov 21',type:'fly',title:'Fly home',chips:['Leave ~6 AM','CUZ 8:05 AM','DFW 10:40 PM'],items:['Leave Casona Santa Teresa around 6 AM for the 8:05 AM flight. Leave the keys as Cinthya asked (checkout is 10 AM).','Connect home; land at DFW 10:40 PM.']}
-  ];
+  /* ---------- Days ---------- */
   const spine=$('#spine');
-  const openSet=new Set(store.get('peru.openDays',[1]));
+  const openSet=new Set(store.get('peru.openDays2',[todayIdx>=0?todayIdx:1]));
+  if(todayIdx>=0) openSet.add(todayIdx);
+  const label={trek:'Trek',fly:'Travel',rest:'Cusco'};
   days.forEach((d,i)=>{
     const li=document.createElement('li');
-    li.className='day '+d.type+(openSet.has(i)?' open':'');
-    const label={trek:'Trek',fly:'Travel',rest:'Rest'}[d.type];
+    li.className='day '+d.type+(openSet.has(i)?' open':'')+(i===todayIdx?' today':'');
+    li.id='day-'+i;
     li.innerHTML=`<span class="dot"></span>
-      <button class="day-btn" aria-expanded="${openSet.has(i)}">
-        <span class="day-date">${d.date}<span class="tag ${d.type}">${label}</span></span>
+      <button class="day-btn" type="button" aria-expanded="${openSet.has(i)}">
+        <span class="day-date">${d.date}<span class="tag ${i===todayIdx?'now':d.type}">${i===todayIdx?'Today':label[d.type]}</span></span>
         <span class="day-title">${d.title}</span>
+        <span class="day-sum">${d.sum}</span>
         <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
       </button>
       <div class="day-body"><div><div class="day-inner">
         <div class="stat-row">${d.chips.map(c=>`<span class="chip">${c}</span>`).join('')}</div>
-        <ul>${d.items.map(x=>`<li>${x}</li>`).join('')}</ul>
+        <div class="blk"><h4>Schedule</h4><div class="sched">${d.sched.map(([t,x])=>`<div class="sr"><span class="tm">${t}</span><span>${x}</span></div>`).join('')}</div></div>
+        <div class="blk"><h4>What to expect</h4><ul>${d.expect.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+        <div class="blk how"><h4>How to approach it</h4><ul>${d.approach.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+        <div class="blk"><h4>Have on you</h4><div class="carry">${d.carry.map(x=>`<span>${x}</span>`).join('')}</div></div>
       </div></div></div>`;
     li.querySelector('.day-btn').addEventListener('click',e=>{
       const open=li.classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',open);
-      open?openSet.add(i):openSet.delete(i);store.set('peru.openDays',[...openSet]);
+      open?openSet.add(i):openSet.delete(i);store.set('peru.openDays2',[...openSet]);
     });
     spine.appendChild(li);
   });
-  function setAll(open){document.querySelectorAll('.day').forEach((li,i)=>{li.classList.toggle('open',open);li.querySelector('.day-btn').setAttribute('aria-expanded',open);open?openSet.add(i):openSet.delete(i)});store.set('peru.openDays',[...openSet])}
+  function setAll(open){document.querySelectorAll('.day').forEach((li,i)=>{li.classList.toggle('open',open);li.querySelector('.day-btn').setAttribute('aria-expanded',open);open?openSet.add(i):openSet.delete(i)});store.set('peru.openDays2',[...openSet])}
   $('#expandAll').onclick=()=>setAll(true);$('#collapseAll').onclick=()=>setAll(false);
 
-  /* Booking tracker */
-  (function(){
-    let st=store.get('peru.booking',[true,true,false,false,false]);
-    const items=[...document.querySelectorAll('#steps .step')];
-    function draw(){
-      const next=st.indexOf(false);
-      items.forEach((li,i)=>{li.classList.toggle('done',st[i]);li.classList.toggle('next',i===next);li.querySelector('button').setAttribute('aria-pressed',st[i])});
-      const n=st.filter(Boolean).length; $('#bkStatus').textContent = n===5?'All set':`${n} of 5 done`;
-    }
-    items.forEach((li,i)=>li.querySelector('button').addEventListener('click',()=>{st[i]=!st[i];store.set('peru.booking',st);draw();if(st[i])toast(li.querySelector('span').textContent+' ✓')}));
-    draw();
-    $('#contacts').addEventListener('click',e=>{const b=e.target.closest('[data-copy]');if(!b)return;const t=b.dataset.copy;
-      navigator.clipboard?.writeText(t).then(()=>toast('Number copied'),()=>toast(t)) ?? toast(t)});
-    $('#copyEmail').addEventListener('click',()=>{const t='info@alpacaexpeditions.com';
-      navigator.clipboard?.writeText(t).then(()=>toast('Email copied'),()=>toast(t)) ?? toast(t)});
-  })();
+  /* ---------- Trip shape ---------- */
+  $('#shape').innerHTML=days.map((d,i)=>`<button class="sd ${d.type}${i===todayIdx?' today':''}" type="button" data-day="${i}" aria-label="${d.date}: ${d.title}">
+      <span class="wd">${d.wd}<b>${d.dn}</b></span>
+      <span class="bar"></span>
+      <span class="what">${d.short}</span>
+      <span class="alt">${d.alt?`<i style="height:${Math.round((d.alt-2000)/2000*44)}px"><span>${d.alt.toLocaleString()} m</span></i>`:''}</span>
+      <span class="sleep">${d.sleep}${d.alt?`<em class="sm"> · ${d.alt.toLocaleString()} m</em>`:''}</span>
+    </button>`).join('');
+  $('#shape').addEventListener('click',e=>{const b=e.target.closest('[data-day]');if(!b)return;const i=+b.dataset.day;
+    show('days');const li=$('#day-'+i);if(!li.classList.contains('open'))li.querySelector('.day-btn').click();
+    setTimeout(()=>li.scrollIntoView({behavior:'smooth',block:'start'}),60)});
 
-  /* Cost calc */
+  /* ---------- Booking tracker ---------- */
+  let st=store.get('peru.booking',[true,true,false,false,false]);
+  const stepEls=[...document.querySelectorAll('#steps .step')];
+  function drawSteps(){
+    const next=st.indexOf(false);
+    stepEls.forEach((li,i)=>{li.classList.toggle('done',st[i]);li.classList.toggle('next',i===next);li.querySelector('button').setAttribute('aria-pressed',st[i])});
+    const n=st.filter(Boolean).length; $('#bkStatus').textContent=n===5?'All set':`${n} of 5 done`;
+  }
+  stepEls.forEach((li,i)=>li.querySelector('button').addEventListener('click',()=>{st[i]=!st[i];store.set('peru.booking',st);drawSteps();if(st[i])toast(li.querySelector('span').textContent+' ✓')}));
+  drawSteps();
+
+  /* ---------- Copy buttons ---------- */
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-copy]');if(b)copy(b.dataset.copy)});
+  $('#jump').addEventListener('click',e=>{const b=e.target.closest('[data-jump]');if(b)document.getElementById(b.dataset.jump).scrollIntoView({behavior:'smooth',block:'start'})});
+
+  /* ---------- Checklists ---------- */
+  function checklist(key,groups,box,bar,count,onChange){
+    const state=store.get(key,{});
+    const el=$(box);
+    el.innerHTML=groups.map((g,gi)=>`<div class="card group"><h3>${g.h}</h3>${g.sub?`<p class="gsub">${g.sub}</p>`:''}${g.items.map((it,ii)=>{
+      const id=`${key}-${gi}-${ii}`;const [t,s]=Array.isArray(it)?it:[it];
+      return `<label class="check" for="${id}"><input type="checkbox" id="${id}" ${state[id]?'checked':''}><span>${t}${s?`<small>${s}</small>`:''}</span></label>`}).join('')}</div>`).join('');
+    const boxes=[...el.querySelectorAll('input')];
+    function upd(){const n=boxes.filter(b=>b.checked).length;$(bar).style.width=(n/boxes.length*100)+'%';$(count).textContent=`${n} / ${boxes.length}`;onChange&&onChange();return n===boxes.length}
+    boxes.forEach(b=>b.addEventListener('change',()=>{state[b.id]=b.checked;store.set(key,state);if(upd()&&b.checked)toast('All done. Nice work.')}));
+    upd();
+    return {state,groups,reset(){boxes.forEach(b=>{b.checked=false;state[b.id]=false});store.set(key,state);upd();toast('Checks cleared')}};
+  }
+  const prepGroups=[
+    {h:'This week',when:'This week',sub:'Alpaca needs some of these 48 hours ahead.',items:[
+      ['Reply to Alpaca confirming both passport numbers','Check them against your actual passports'],
+      ['Each of you signs the T&C agreement form','Linked in Alpaca’s Nov 12 email'],
+      ['Decide on sleeping bag and air mattress rentals','Alpaca needs 48 h notice: by Nov 15'],
+      ['Email Alpaca your pickup and drop-off addresses','San Blas Loft (Nov 17) and Casona Santa Teresa (Nov 20)'],
+      ['Tell Alpaca you arrive Nov 16','One day before the trek; confirm check-in and briefing'],
+      ['Ask Alpaca how stored luggage gets back to you on Nov 20','You’re back around 8 PM; the office closes at 7']]},
+    {h:'Hosts & admin',when:'This week',sub:'Quick messages that save stress later.',items:[
+      ['Message Hilda (San Blas Loft)','8:45 AM landing, early bag drop, key drop-off before a pre-dawn pickup'],
+      ['Reply to Cinthya (Casona Santa Teresa)','Arriving by land ~8 PM with Alpaca; leaving ~6 AM'],
+      ['Travel insurance covers trekking to ~4,200 m'],
+      ['Tell your bank you’ll be in Peru'],
+      ['Set up an eSIM or international plan'],
+      ['Plan your altitude approach']]},
+    {h:'Before you fly',when:'Nov 14–15',sub:'The last 48 hours.',items:[
+      ['Get US dollar cash for the Alpaca balance','Crisp, untorn bills only'],
+      ['Open this app once on Wi-Fi','Saves the latest version for offline use'],
+      ['Download offline maps and entertainment'],
+      ['Pack using the lists below','Boots in your carry-on'],
+      ['Check in for the flight; note the Lima bag re-check']]}
+  ];
+  const packGroups=[
+    {h:'Carry-on for the flights',sub:'Everything you can’t lose.',items:[['Original passports','Needed in Lima, at Alpaca, and at KM 82'],['USD cash + cards'],['Meds + small first-aid kit'],['Hiking boots','Worn or carried on'],['Phone, charger, battery pack'],['Warm layer for the plane and Cusco morning']]},
+    {h:'Daypack · on your back',sub:'About 25 L. Everything you need between camps.',items:[['Reusable water bottles or a bladder','No plastic; filled for day 1 morning'],['Rain jacket','Alpaca also gives ponchos'],['Fleece + warm hat + gloves'],['Sunscreen, lip balm, sunglasses, sun hat'],['Snacks + electrolytes'],['Toilet paper, sanitizer, small waste bag'],['Insect repellent','For days 3–4'],['Headlamp'],['Soles in small notes'],['Passport, in a zip bag'],['Trekking poles','Meghna’s rented; Vivek bring or rent']]},
+    {h:'Porter duffel · at camp',sub:'7 kg including sleeping gear, inside plastic bags.',items:[['Sleeping bag','Rented or your own'],['Down or puffy jacket'],['Dry base layer for sleeping'],['Wool socks, one pair per day'],['Quick-dry shirts & pants'],['Camp sandals or light shoes'],['Toiletries, small'],['Spare plastic bags for wet clothes'],['Earplugs + eye mask']]},
+    {h:'Left in Cusco storage',sub:'Handed to your guide at pickup on the 17th.',items:[['Clean clothes for Nov 20–21'],['Anything you won’t need on the trail'],['Small lock for the stored bag']]}
+  ];
+  const prep=checklist('peru.prep',prepGroups,'#prepGroups','#prepBar','#prepCount',()=>drawNext());
+  const pack=checklist('peru.pack2',packGroups,'#packGroups','#packBar','#packCount');
+  $('#packReset').onclick=()=>pack.reset();
+
+  function drawNext(){
+    if(!window._prepReady) return;
+    const out=[];
+    prepGroups.forEach((g,gi)=>g.items.forEach((it,ii)=>{const id=`peru.prep-${gi}-${ii}`;if(!prep.state[id]&&out.length<3){const [t,s]=Array.isArray(it)?it:[it];out.push(`<div class="nx"><span class="when">${g.when}</span><span class="t">${t}${s?`<small>${s}</small>`:''}</span></div>`)}}));
+    $('#nextUp').innerHTML=out.length?out.join(''):'<div class="nx"><span class="when">Done</span><span class="t">Everything on the prep list is ticked. Enjoy the trip.</span></div>';
+  }
+  window._prepReady=true; drawNext();
+
+  /* ---------- Cost ---------- */
   let pax=store.get('peru.pax',2);
   const air=$('#air'),tour=$('#tour'),hotel=$('#hotel'),depIn=$('#dep');
   air.value=store.get('peru.air',1860);tour.value=store.get('peru.tour','');hotel.value=store.get('peru.hotel','');depIn.value=store.get('peru.dep',400);
@@ -619,16 +885,15 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
     $('#pax').textContent=pax;
     const a=+air.value||0,t=+tour.value||0,h=+hotel.value||0;
     $('#total').textContent=fmt(pax*(a+t)+h);
-    $('#totalNote').textContent = t? `${pax} × (${fmt(a)} air + ${fmt(t)} tour)${h?' + '+fmt(h)+' hotels':''} · about ${fmt((pax*(a+t)+h)/pax)} per person` : 'Airfare only so far. Add the tour price and hotels to see the full total.';
+    $('#totalNote').textContent=t?`${pax} × (${fmt(a)} air + ${fmt(t)} tour)${h?' + '+fmt(h)+' stays':''} · about ${fmt((pax*(a+t)+h)/pax)} per person`:'Airfare only so far. Add the tour price and stays to see the full total.';
     $('#balBox').hidden=!t; $('#bal').textContent=fmt(Math.max(0,pax*t-(+depIn.value||0)));
-    store.set('peru.dep',depIn.value);
-    store.set('peru.pax',pax);store.set('peru.air',air.value);store.set('peru.tour',tour.value);store.set('peru.hotel',hotel.value);
+    store.set('peru.pax',pax);store.set('peru.air',air.value);store.set('peru.tour',tour.value);store.set('peru.hotel',hotel.value);store.set('peru.dep',depIn.value);
   }
   $('#paxMinus').onclick=()=>{pax=Math.max(1,pax-1);calc()};
   $('#paxPlus').onclick=()=>{pax=Math.min(12,pax+1);calc()};
   [air,tour,hotel,depIn].forEach(el=>el.addEventListener('input',calc));calc();
 
-  /* Elevation profile */
+  /* ---------- Elevation ---------- */
   const pts=[
     {n:'KM 82 trailhead',km:0,m:2720,d:'Start of the trail and passport checkpoint. Day 1 morning.'},
     {n:'Llactapata',km:7,m:2840,d:'Large Inca terraced site above the Urubamba valley. Day 1.'},
@@ -637,7 +902,7 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
     {n:'Pacaymayo',km:20.5,m:3600,d:'Valley floor between the two passes. Day 2.'},
     {n:'Runkurakay Pass',km:23,m:3950,d:'Second pass of day 2, near the round Runkurakay ruin.'},
     {n:'Chaquicocha',km:28,m:3600,camp:1,d:'Camp, night 2. Clear nights here are good for stars.'},
-    {n:'Phuyupatamarca',km:33,m:3650,d:'"Town in the clouds" with ritual baths. Day 3.'},
+    {n:'Phuyupatamarca',km:33,m:3650,d:'“Town in the clouds” with ritual baths. Day 3.'},
     {n:'Wiñay Wayna',km:38,m:2650,camp:1,d:'Camp, night 3, next to the best ruin on the trail after Machu Picchu.'},
     {n:'Sun Gate',km:41,m:2720,d:'Inti Punku: first view of Machu Picchu. Day 4 sunrise.'},
     {n:'Machu Picchu',km:42,m:2430,d:'Guided tour of the citadel. Day 4.'}
@@ -648,60 +913,31 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
   [2500,3000,3500,4000].forEach(v=>{g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text x="${L-8}" y="${y(v)+4}" text-anchor="end">${v.toLocaleString()}</text>`});
   [0,10,20,30,42].forEach(k=>{g+=`<text x="${x(k)}" y="${H-B+18}" text-anchor="middle">${k} km</text>`});
   g+=`<text x="${L-8}" y="${T-14}" text-anchor="end">m</text></g>`;
-  const d='M'+pts.map(p=>`${x(p.km).toFixed(1)} ${y(p.m).toFixed(1)}`).join(' L');
-  const area=d+` L${x(42)} ${H-B} L${x(0)} ${H-B} Z`;
-  // day bands
+  const dp='M'+pts.map(p=>`${x(p.km).toFixed(1)} ${y(p.m).toFixed(1)}`).join(' L');
+  const area=dp+` L${x(42)} ${H-B} L${x(0)} ${H-B} Z`;
   const bands=[[0,14,'Day 1'],[14,28,'Day 2'],[28,38,'Day 3'],[38,42,'Day 4']];
-  let bandsSvg=bands.map(([a,b,l])=>`<text x="${(x(a)+x(b))/2}" y="${T-14}" text-anchor="middle" class="lbl" style="fill:var(--accent)">${l}</text><line x1="${x(b)}" x2="${x(b)}" y1="${T-6}" y2="${H-B}" style="stroke:var(--line);stroke-dasharray:3 4"/>`).join('');
-  svg.innerHTML=g+bandsSvg+`<path class="area" d="${area}"/><path class="lineP" d="${d}"/>`+
+  const bandsSvg=bands.map(([a,b,l])=>`<text x="${(x(a)+x(b))/2}" y="${T-14}" text-anchor="middle" class="lbl" style="fill:var(--accent)">${l}</text><line x1="${x(b)}" x2="${x(b)}" y1="${T-6}" y2="${H-B}" style="stroke:var(--line);stroke-dasharray:3 4"/>`).join('');
+  svg.innerHTML=g+bandsSvg+`<path class="area" d="${area}"/><path class="lineP" d="${dp}"/>`+
     pts.map((p,i)=>`<circle class="pt${p.camp?' camp':''}" data-i="${i}" cx="${x(p.km)}" cy="${y(p.m)}" r="5" tabindex="0"/>`).join('')+
     `<text class="lbl" x="${x(18)}" y="${y(4215)-12}" text-anchor="middle">4,215 m</text>`;
   const ro=$('#readout');
   function sel(i){
     svg.querySelectorAll('.pt').forEach(c=>c.classList.toggle('on',+c.dataset.i===i));
-    const p=pts[i];ro.innerHTML=`<b>${p.n}</b> · <span class="mono">${p.m.toLocaleString()} m / ${Math.round(p.m*3.281).toLocaleString()} ft · km ${p.km}</span><br><span style="color:var(--muted)">${p.d}</span>`;
+    const p=pts[i];ro.innerHTML=`<b>${p.n}</b> · <span class="mono">${p.m.toLocaleString()} m / ${Math.round(p.m*3.281).toLocaleString()} ft · km ${p.km}</span><br><span class="muted">${p.d}</span>`;
   }
   svg.querySelectorAll('.pt').forEach(c=>{const i=+c.dataset.i;['mouseenter','click','focus'].forEach(ev=>c.addEventListener(ev,()=>sel(i)))});
   sel(3);
   const td=[
-    {n:'Day 1 · Nov 17',t:'KM 82 → Ayapata',p:'14 km, 6–7 h. Warm-up day past Llactapata.',e:40},
-    {n:'Day 2 · Nov 18',t:'Over both passes',p:'Longest and hardest day, up to 4,215 m.',e:100},
+    {n:'Day 1 · Nov 17',t:'KM 82 → Ayapata',p:'14 km, 6–7 h. Warm-up along the valley.',e:40},
+    {n:'Day 2 · Nov 18',t:'Over both passes',p:'The crux. Up to 4,215 m, then a long descent and a second pass.',e:100},
     {n:'Day 3 · Nov 19',t:'Chaquicocha → Wiñay Wayna',p:'10 km, ~5 h, mostly downhill through cloud forest.',e:55},
-    {n:'Day 4 · Nov 20',t:'Sun Gate → Machu Picchu',p:'3:30 AM wake-up, short hike, guided tour.',e:30}
+    {n:'Day 4 · Nov 20',t:'Sun Gate → Machu Picchu',p:'3:30 AM wake-up, short hike, guided tour, train.',e:30}
   ];
-  $('#trekdays').innerHTML=td.map(o=>`<div class="td"><div class="n">${o.n}</div><h3>${o.t}</h3><p>${o.p}</p><div class="meter" title="Relative effort"><span style="width:${o.e}%"></span></div></div>`).join('');
+  $('#trekdays').innerHTML=td.map(o=>`<div class="card td"><div class="n">${o.n}</div><h3>${o.t}</h3><p>${o.p}</p><div class="meter" title="Relative effort"><span style="width:${o.e}%"></span></div></div>`).join('');
 
-  /* Checklists */
-  function checklist(key,groups,box,bar,count){
-    const state=store.get(key,{});
-    const el=$(box);
-    el.innerHTML=groups.map((g,gi)=>`<div class="group"><h3>${g.h}</h3>${g.items.map((it,ii)=>{
-      const id=`${key}-${gi}-${ii}`;const [t,s]=Array.isArray(it)?it:[it];
-      return `<label class="check" for="${id}"><input type="checkbox" id="${id}" ${state[id]?'checked':''}><span>${t}${s?`<small>${s}</small>`:''}</span></label>`}).join('')}</div>`).join('');
-    const boxes=[...el.querySelectorAll('input')];
-    function upd(){const n=boxes.filter(b=>b.checked).length;$(bar).style.width=(n/boxes.length*100)+'%';$(count).textContent=`${n} / ${boxes.length}`;return n===boxes.length}
-    boxes.forEach(b=>b.addEventListener('change',()=>{state[b.id]=b.checked;store.set(key,state);if(upd()&&b.checked)toast('All done. Nice work.')}));
-    upd();
-    return {reset(){boxes.forEach(b=>{b.checked=false;state[b.id]=false});store.set(key,state);upd();toast('Checks cleared')}};
-  }
-  const pack=checklist('peru.pack',[
-    {h:'Documents & money',items:[['Original passport','For Alpaca check-in and the KM 82 checkpoint; valid 6+ months'],'Copy of passport (paper + phone)','Printed Alpaca voucher & e-tickets','Travel insurance details','Credit card + debit card',['Soles in cash','Trail toilets, snacks, and pooled tips: ~80–100 per porter, double for the chef'],['US dollar cash for the Alpaca balance','Clean, untorn bills. Cards add 5%.'],'Pen + notepad for the briefing']},
-    {h:'On the trail',items:['Broken-in hiking boots',['Daypack, about 25 L','Alpaca gives out backpack covers'],['Rain jacket','Alpaca gives out ponchos'],'Down or puffy jacket','Fleece mid-layer','Quick-dry hiking shirts & pants','Warm hat, gloves, buff','Wool socks (one pair per day)','Headlamp + spare batteries',['Trekking poles','Meghna’s are rented from Alpaca. Vivek: bring or rent. Rubber tips required.'],['Reusable water bottles or a bladder','No plastic bottles allowed. Fill them for the first morning.'],['Sleeping bag','Rent from Alpaca with 48 h notice, or bring your own (counts toward 7 kg)'],['Large plastic bags','To waterproof the duffel, plus spares for wet clothes']]},
-    {h:'Health & care',items:['Personal meds + small first-aid kit','Blister care (moleskin, tape)','Sunscreen, lip balm with SPF','Sunglasses + sun hat','Insect repellent (cloud forest)','Hand sanitizer, wipes, toilet paper','Electrolytes & trail snacks']},
-    {h:'Tech & Cusco days',items:['Phone, charger, battery pack','Offline maps downloaded','Camp sandals or light shoes','Comfortable clothes for Cusco evenings',['Small lock for duffel','Also for the bag Alpaca stores'],'Earplugs + eye mask']}
-  ],'#packGroups','#packBar','#packCount');
-  $('#packReset').onclick=()=>pack.reset();
-  checklist('peru.todo',[
-    {h:'Stays',items:[['Message Hilda (San Blas Loft, Nov 16)','Your 8:45 AM landing, early bag drop, and key drop-off before the early pickup'],['Reply to Cinthya (Casona Santa Teresa, Nov 20)','Arriving by land around 8 PM with Alpaca, leaving ~6 AM; ask about keys'],['Ask Alpaca how to get your stored luggage on Nov 20','You’re back around 8 PM and the office closes at 7'],['Airport transfers','CUZ on the 16th, and early on the 21st'],['Travel insurance','Make sure it covers trekking to ~4,200 m']]},
-    {h:'Alpaca',items:[['Email Alpaca your pickup and drop-off addresses','San Blas Loft for Nov 17, Casona Santa Teresa for Nov 20'],['Tell Alpaca you arrive Nov 16','Only 1 day before the trek; confirm check-in and the 6 PM briefing'],['Get US dollar cash for the balance','Paid at office check-in on Nov 16. Bills must be in good condition.'],['Reply to confirm both passport numbers','Check the numbers in Alpaca’s Nov 12 email against your passports'],['Each of you signs the T&C agreement form','Linked in Alpaca’s Nov 12 email'],['Decide on sleeping bag and air mattress rentals','Alpaca needs 48 h notice, so by Nov 15'],'Pickup time for Nov 17']},
-    {h:'Health & admin',items:['Plan altitude approach / prophylaxis','Check routine vaccines + Hep A, typhoid','Tell your bank you’ll be in Peru','eSIM or international phone plan','Check passport has 2 blank pages']}
-  ],'#todoGroups','#todoBar','#todoCount');
-
-  /* Phrases */
-  const ph=[['Buenos días','Good morning'],['¿Cuánto cuesta?','How much is it?'],['Agua sin gas, por favor','Still water, please'],['La cuenta, por favor','The check, please'],['Me siento mareado','I feel dizzy'],['Sulpayki','Thank you (Quechua)']];
-  $('#phrases').innerHTML=ph.map(([e,n])=>`<div class="ph"><span class="es">${e}</span><span class="en">${n}</span><button class="copy" data-t="${e}">Copy</button></div>`).join('');
-  $('#phrases').addEventListener('click',e=>{const b=e.target.closest('.copy');if(!b)return;
-    navigator.clipboard?.writeText(b.dataset.t).then(()=>toast('Copied'),()=>toast('Copy blocked; select the text instead')) ?? toast('Select the text to copy')});
+  /* ---------- Phrases ---------- */
+  const ph=[['Buenos días','Good morning'],['¿Cuánto cuesta?','How much is it?'],['Agua sin gas, por favor','Still water, please'],['La cuenta, por favor','The check, please'],['¿Dónde está el baño?','Where’s the bathroom?'],['Me siento mareado','I feel dizzy'],['No, gracias','No, thank you'],['Sulpayki','Thank you (Quechua)']];
+  $('#phrases').innerHTML=ph.map(([e,n])=>`<div class="ph"><span class="es">${e}</span><span class="en">${n}</span><button class="mini" type="button" data-copy="${e}">Copy</button></div>`).join('');
 })();
 </script>
 
@@ -712,7 +948,7 @@ foot,.foot{display:block;margin-top:34px;font-size:12.5px;color:var(--muted)}
   const t=document.getElementById('toast');
   const say=m=>{t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)};
   b.addEventListener('click',async()=>{
-    const data={title:'Peru Trip',text:'Our Peru trip app (Nov 15\u201321). Open it, then Share \u2192 Add to Home Screen to install.',url};
+    const data={title:'Peru Trip',text:'Our Peru trip app (Nov 15–21). Open it, then Share → Add to Home Screen to install.',url};
     if(navigator.share){try{await navigator.share(data);return}catch(e){if(e&&e.name==='AbortError')return}}
     try{await navigator.clipboard.writeText(url);say('Link copied. Paste it in a text.')}catch(e){say(url)}
   });
