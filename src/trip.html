@@ -284,6 +284,14 @@ button{font:inherit;color:inherit}
 .leg-rows{margin-top:14px;display:grid;gap:8px}
 .lr{display:grid;grid-template-columns:110px 1fr;gap:10px;font-size:14.5px;border-top:1px solid var(--line);padding-top:8px}
 .lr .k{color:var(--muted)}
+.fl{margin-top:14px;display:grid;gap:0}
+.seg{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:10px 0;border-top:1px solid var(--line)}
+.seg .sn{grid-column:1/-1;font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.seg .st{grid-column:1/-1;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:15px}
+.seg .st span{font-size:14px}
+.seg .sx{grid-column:1/-1;font-size:13px;color:var(--muted)}
+.lay{font-size:13.5px;color:var(--accent);font-weight:600;padding:8px 12px;margin:2px 0;background:var(--accent-soft);border-radius:8px}
+.lay.warn{color:var(--warn);background:var(--warn-soft)}
 .calc{display:grid;gap:14px}
 .calc-row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end}
 .field label{display:block;font-size:11.5px;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
@@ -424,7 +432,7 @@ button{font:inherit;color:inherit}
       <article class="card phase">
         <div class="when">Nov 20–21 · Machu Picchu &amp; home</div>
         <h3>Sunrise at the Sun Gate, back by night</h3>
-        <p>A 3:30 AM start, the citadel tour, the Vistadome train, Cusco around 8 PM, then a 6 AM departure for the airport.</p>
+        <p>A 3:30 AM start, the citadel tour, the Vistadome train, Cusco around 8 PM, then a 5:45 AM departure for the 7:55 AM flight.</p>
         <div class="how"><b>Approach:</b> pack for the flight the night before the trek ends, so the last night is just keys, shower and sleep.</div>
       </article>
     </div>
@@ -438,6 +446,8 @@ button{font:inherit;color:inherit}
       <div class="hd"><div><b>Re-check your bags in Lima</b><span>Luggage can’t go straight through to Cusco. Collect it after immigration and check it in again, whatever your airline says.</span></div></div>
       <div class="hd"><div><b>US dollar cash in perfect condition</b><span>For the Alpaca balance. Torn or worn bills get refused. Cards cost 5% extra.</span></div></div>
       <div class="hd"><div><b>No plastic bottles on the trail</b><span>It’s a zero-plastic site. Bring reusable bottles, already filled for the first morning.</span></div></div>
+      <div class="hd"><div><b>You land at Love Field (DAL), not DFW</b><span>Delta rebooked the return. Plan your ride home from Love Field at 10:40 PM on Nov 21. If your car is parked at DFW, you’ll need a ride across town.</span></div></div>
+      <div class="hd"><div><b>Tight connection in Atlanta coming home</b><span>1 h 45 min including US immigration, customs and security. Use the free Mobile Passport Control app and head straight through.</span></div></div>
       <div class="hd info"><div><b>Altitude is the wildcard</b><span>Alpaca recommends 2 days in Cusco and you have 1. Go slow on the 16th and plan your altitude approach in advance.</span></div></div>
     </div>
 
@@ -508,7 +518,7 @@ button{font:inherit;color:inherit}
       <article class="card stay">
         <div><div class="eyebrow">Night of Nov 20 · Airbnb</div><h3>Casona Santa Teresa</h3><div class="who">Host: Cinthya · historic center</div></div>
         <div class="inout"><div><div class="k">Check-in</div><b>Fri 1:00 PM</b></div><div class="arrow">→</div><div class="r"><div class="k">Checkout</div><b>Sat 10:00 AM</b></div></div>
-        <ul><li>Cinthya meets you with the keys. You arrive around 8 PM with Alpaca.</li><li>You leave around 6 AM, so agree how to leave the keys.</li></ul>
+        <ul><li>Cinthya meets you with the keys. You arrive around 8 PM with Alpaca.</li><li>You leave around 5:45 AM, so agree how to leave the keys.</li></ul>
       </article>
     </div>
   </section>
@@ -616,36 +626,43 @@ button{font:inherit;color:inherit}
       <div><div class="k">Luggage storage</div><div class="v">Free. Hand bags to your guide at pickup on the 17th.</div></div>
     </div>
 
-    <div class="sec" id="ref-flights"><h2>Flights</h2><p>Add the connecting flight numbers from your e-ticket, or ask me to.</p></div>
+    <div class="sec" id="ref-flights"><h2>Flights</h2><p>From your Delta trip page. Delta rebooked the return: it now leaves Cusco at 7:55 AM and lands at Love Field.</p></div>
     <div class="legs">
       <article class="card">
-        <div class="leg-head"><div><div class="eyebrow">Outbound · Sun Nov 15 → Mon Nov 16</div><h3 style="font-size:20px">Dallas to Cusco</h3></div><span class="chip">3 flights</span></div>
+        <div class="leg-head"><div><div class="eyebrow">Outbound · Sun Nov 15 → Mon Nov 16 · 15 h 20 min</div><h3 style="font-size:20px">Dallas to Cusco</h3></div><span class="chip">3 flights</span></div>
         <div class="route">
-          <div class="ap"><b>DFW</b><span>Dallas/Fort Worth</span></div>
+          <div class="ap"><b>DFW</b><span>Terminal E · gate E14</span></div>
           <div class="track"><div class="plane"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 15.5v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V8.5l-8 5v2l8-2.5V18l-2 1.5V21l3.5-1 3.5 1v-1.5L13 18v-5z" transform="rotate(90 12 12)"/></svg></div></div>
           <div class="ap r"><b>CUZ</b><span>Cusco</span></div>
         </div>
-        <div class="leg-rows">
-          <div class="lr"><span class="k">DFW → ATL</span><span>Depart <b class="mono">4:25 PM</b>, Sun Nov 15</span></div>
-          <div class="lr"><span class="k">Atlanta</span><span>Layover <b class="mono">2 h 47 min</b>. Allow time to reach the international gates.</span></div>
-          <div class="lr"><span class="k">ATL → LIM</span><span>Overnight to Lima (Jorge Chávez)</span></div>
-          <div class="lr"><span class="k">Lima</span><span>Immigration and customs, then <b>collect your bags and re-check them</b></span></div>
-          <div class="lr"><span class="k">LIM → CUZ</span><span>Arrive <b class="mono">8:45 AM</b>, Mon Nov 16</span></div>
+        <div class="fl">
+          <div class="seg"><div class="sn">DL2143 · Delta · A321</div><div class="st"><b>DFW → ATL</b><span>Departs <b class="mono">4:25 PM</b> Sun</span></div><div class="sx">Main Basic · seats 32E, 32F</div></div>
+          <div class="lay">Atlanta layover · 2 h 47 min. Move to the international gates.</div>
+          <div class="seg"><div class="sn">DL6078 · operated by LATAM · 767-300</div><div class="st"><b>ATL → LIM</b><span>Overnight</span></div><div class="sx">Light fare · seats 32F, 33J (not together)</div></div>
+          <div class="lay">Lima layover · 2 h 20 min. Immigration and customs; re-check any checked bags.</div>
+          <div class="seg"><div class="sn">DL6219 · operated by LATAM Peru · A319</div><div class="st"><b>LIM → CUZ</b><span>Arrives <b class="mono">8:45 AM</b> Mon</span></div><div class="sx">Light fare · seats assigned at check-in</div></div>
         </div>
       </article>
       <article class="card">
-        <div class="leg-head"><div><div class="eyebrow">Return · Sat Nov 21</div><h3 style="font-size:20px">Cusco to Dallas</h3></div><span class="chip">same day</span></div>
+        <div class="leg-head"><div><div class="eyebrow">Return · Sat Nov 21 · 15 h 45 min · rebooked by Delta</div><h3 style="font-size:20px">Cusco to Dallas Love Field</h3></div><span class="chip">3 flights</span></div>
         <div class="route">
           <div class="ap"><b>CUZ</b><span>Cusco</span></div>
           <div class="track"><div class="plane" style="animation-delay:-2.5s"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 15.5v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V8.5l-8 5v2l8-2.5V18l-2 1.5V21l3.5-1 3.5 1v-1.5L13 18v-5z" transform="rotate(90 12 12)"/></svg></div></div>
-          <div class="ap r"><b>DFW</b><span>Dallas/Fort Worth</span></div>
+          <div class="ap r"><b>DAL</b><span>Love Field · Terminal 1</span></div>
         </div>
-        <div class="leg-rows">
-          <div class="lr"><span class="k">Depart</span><span><b class="mono">8:05 AM</b>. Be at the airport around 6:30.</span></div>
-          <div class="lr"><span class="k">Arrive</span><span><b class="mono">10:40 PM</b>, DFW. US customs at your first US airport.</span></div>
+        <div class="fl">
+          <div class="seg"><div class="sn">DL6233 · operated by LATAM Peru · A319</div><div class="st"><b>CUZ → LIM</b><span><b class="mono">7:55 AM</b> → <b class="mono">9:30 AM</b></span></div><div class="sx">Light fare · seats assigned at check-in</div></div>
+          <div class="lay">Lima layover · 2 h 40 min. Peru exit immigration for the international flight.</div>
+          <div class="seg"><div class="sn">DL6077 · operated by LATAM · 767-300</div><div class="st"><b>LIM → ATL</b><span><b class="mono">12:10 PM</b> → <b class="mono">7:35 PM</b></span></div><div class="sx">Light fare · seats assigned at check-in</div></div>
+          <div class="lay warn">Atlanta layover · 1 h 45 min, including US immigration, customs and security again. Tight: walk straight there.</div>
+          <div class="seg"><div class="sn">DL1104 · Delta · 717-200</div><div class="st"><b>ATL → DAL</b><span><b class="mono">9:20 PM</b> → <b class="mono">10:40 PM</b></span></div><div class="sx">Main Basic · seats assigned after check-in</div></div>
         </div>
       </article>
     </div>
+    <div class="card note" style="margin-top:12px"><h3>About your fares</h3><ul>
+      <li><b>Every leg allows a personal item,</b> so your daypack-only plan works on all six flights.</li>
+      <li><b>Main Basic</b> (the Delta legs): seats are assigned after check-in, there are no changes, and you board in the last group.</li>
+      <li><b>Check in 24 hours ahead</b> on the Delta app for the return, to get the best chance of sitting together.</li></ul></div>
 
     <div class="sec" id="ref-money"><h2>Money</h2></div>
     <div class="notes">
@@ -700,9 +717,13 @@ button{font:inherit;color:inherit}
     <div class="notes">
       <div class="card note"><h3>US customs</h3><ul>
         <li><b>Don’t bring coca leaves, tea or candy home.</b> Coca products are illegal to bring into the US, even as souvenirs.</li>
-        <li>Declare any food, plant or animal products, such as dried fruit, seeds or alpaca items, on the customs form.</li></ul></div>
+        <li>Declare any food, plant or animal products, such as dried fruit, seeds or alpaca items, on the customs form.</li>
+        <li><b>You clear customs in Atlanta</b> with only 1 h 45 min to connect. Fill in the free CBP Mobile Passport Control app as you land to use the faster line.</li></ul></div>
+      <div class="card note"><h3>Getting home</h3><ul>
+        <li>You land at <b>Dallas Love Field (DAL), Terminal 1</b>, at 10:40 PM, not DFW.</li>
+        <li>Arrange a ride or rideshare ahead of time. If your car is at DFW, plan how to get across town.</li></ul></div>
       <div class="card note"><h3>The last morning</h3><ul>
-        <li>Leave Casona Santa Teresa around 6 AM for the 8:05 AM flight.</li>
+        <li>Leave Casona Santa Teresa around 5:45 AM for the 7:55 AM flight.</li>
         <li>Pack the night before. Keep passports, phone and chargers in one pocket of your carry-on.</li></ul></div>
     </div>
 
@@ -744,8 +765,8 @@ button{font:inherit;color:inherit}
   const days=[
     {date:'Sun Nov 15',iso:'2026-11-15',wd:'Sun',dn:15,type:'fly',short:'Fly',sleep:'On the plane',alt:0,
      title:'Fly overnight to Peru',sum:'Afternoon departure, overnight to Lima.',
-     chips:['DFW 4:25 PM','ATL 2h 47m'],
-     sched:[['4:25 PM','Depart DFW for Atlanta'],['Evening','2 h 47 min layover in ATL'],['Overnight','ATL → Lima']],
+     chips:['DFW 4:25 PM','Terminal E','ATL 2h 47m','LIM 2h 20m'],
+     sched:[['~2:30 PM','At DFW Terminal E (gate E14)'],['4:25 PM','DL2143 to Atlanta'],['Evening','2 h 47 min in ATL; move to the international gates'],['Overnight','DL6078 (LATAM) to Lima'],['Early','2 h 20 min in Lima: immigration, then DL6219 to Cusco']],
      expect:['A long, broken night. You may get only a few hours of sleep.','Lima immigration happens early next morning, before your Cusco flight.'],
      approach:['Sleep as much as you can on the Lima flight; tomorrow is a full day at altitude.','Hydrate on the plane and go easy on alcohol.','Wear or carry on your hiking boots. They’re the one thing you can’t replace in Cusco.'],
      carry:['Passports','Meds','Warm layer','Boots','Phone + charger']},
@@ -785,11 +806,11 @@ button{font:inherit;color:inherit}
      approach:['Use the restroom before you enter Machu Picchu. There are none inside.','Get your train tickets from the guide before you split up.','Ask Alpaca at the briefing how your stored luggage gets back to you tonight.','Repack for the flight tonight, before you sleep.'],
      carry:['Passport','Headlamp','Warm layer','Soles','Train ticket']},
     {date:'Sat Nov 21',iso:'2026-11-21',wd:'Sat',dn:21,type:'fly',short:'Home',sleep:'Home',alt:0,
-     title:'Fly home',sum:'6 AM departure, home late evening.',
-     chips:['Leave ~6 AM','CUZ 8:05 AM','DFW 10:40 PM'],
-     sched:[['~6:00 AM','Leave Casona Santa Teresa; keys as Cinthya asked'],['8:05 AM','Depart Cusco'],['10:40 PM','Land at DFW']],
-     expect:['Cusco’s airport is small. Morning flights can be delayed by weather.','US customs at your first US airport.'],
-     approach:['Leave any coca tea or candy behind. It isn’t allowed into the US.','Keep passports and phone in one pocket all morning.'],
+     title:'Fly home to Love Field',sum:'5:45 AM departure, Love Field at 10:40 PM.',
+     chips:['Leave ~5:45 AM','CUZ 7:55 AM','ATL 1h 45m','DAL 10:40 PM'],
+     sched:[['~5:45 AM','Leave Casona Santa Teresa; keys as Cinthya asked'],['7:55 AM','DL6233 (LATAM) Cusco → Lima, lands 9:30'],['12:10 PM','DL6077 (LATAM) Lima → Atlanta, lands 7:35 PM'],['7:35–9:20 PM','Atlanta: immigration, customs, security, gate'],['9:20 PM','DL1104 Atlanta → Love Field'],['10:40 PM','Land at Dallas Love Field (DAL), Terminal 1']],
+     expect:['Cusco’s airport is small. Morning flights can be delayed by weather.','In Lima you go through Peru exit immigration for the international flight.','Atlanta is the crunch: US immigration, customs and security again in 1 h 45 min.'],
+     approach:['Leave any coca tea or candy behind. It isn’t allowed into the US.','Fill in the Mobile Passport Control app as you land in Atlanta, then go straight to immigration.','If the Atlanta connection is missed, Delta rebooks you: go to a Delta service desk or use the app.','Have your ride from Love Field arranged before you leave Cusco.'],
      carry:['Passports','Phone','Chargers']}
   ];
 
@@ -910,7 +931,7 @@ button{font:inherit;color:inherit}
       ['Ask Alpaca how stored luggage gets back to you on Nov 20','You’re back around 8 PM; the office closes at 7']]},
     {h:'Hosts & admin',when:'This week',sub:'Quick messages that save stress later.',items:[
       ['Message Hilda (San Blas Loft)','8:45 AM landing, early bag drop, key drop-off before a pre-dawn pickup'],
-      ['Reply to Cinthya (Casona Santa Teresa)','Arriving by land ~8 PM with Alpaca; leaving ~6 AM'],
+      ['Reply to Cinthya (Casona Santa Teresa)','Arriving by land ~8 PM with Alpaca; leaving ~5:45 AM'],
       ['Travel insurance covers trekking to ~4,200 m'],
       ['Tell your bank you’ll be in Peru'],
       ['Set up an eSIM or international plan'],
@@ -920,7 +941,7 @@ button{font:inherit;color:inherit}
       ['Open this app once on Wi-Fi','Saves the latest version for offline use'],
       ['Download offline maps and entertainment'],
       ['Pack using the lists below','Boots in your carry-on'],
-      ['Check in for the flight; note the Lima bag re-check']]}
+      ['Check in for the flight; note the Lima bag re-check'],['Install the CBP Mobile Passport Control app','Speeds up US immigration in Atlanta on the way home'],['Arrange your ride home from Love Field (DAL)','Sat Nov 21, 10:40 PM, Terminal 1'],['Check in for the return 24 h ahead (Nov 20)','You’ll likely be on the trail. Try at Machu Picchu or on the train, or at the Airbnb that night.']]}
   ];
   const packGroups=[
     {h:'Carry-on for the flights',sub:'Everything you can’t lose.',items:[['Original passports','Needed in Lima, at Alpaca, and at KM 82'],['USD cash + cards'],['Meds + small first-aid kit'],['Hiking boots','Worn or carried on'],['Phone, charger, battery pack'],['Warm layer for the plane and Cusco morning']]},
