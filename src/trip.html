@@ -348,6 +348,33 @@ button{font:inherit;color:inherit}
 .toast:empty{visibility:hidden}
 .toast.show{transform:translate(-50%,0)}
 
+/* Wildlife dex */
+.dexhead{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.dexhead .big{font-family:var(--f-mono);font-size:30px;font-weight:700;line-height:1}
+.dexhead .big small{font-size:15px;color:var(--muted);font-weight:500}
+.dexhead .prog{flex:1;min-width:160px}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.filters button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted)}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.dex{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.mon{position:relative;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:12px;display:grid;gap:6px;cursor:pointer;text-align:left;font:inherit;color:inherit;transition:transform .15s,border-color .2s,background .2s;min-width:0}
+.mon:active{transform:scale(.97)}
+.mon .no{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.mon .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:var(--bg);color:var(--muted);transition:background .25s,color .25s}
+.mon .ic svg{width:28px;height:28px}
+.mon .nm{font-family:var(--f-display);font-size:17px;line-height:1.15}
+.mon .loc{font-size:12px;color:var(--muted);font-style:italic}
+.mon .tip{font-size:12.5px;color:var(--muted);line-height:1.35}
+.mon .rar{position:absolute;top:10px;right:10px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:999px;background:var(--bg);color:var(--muted)}
+.mon .rar.uncommon{color:var(--sky)} .mon .rar.rare{color:var(--accent)} .mon .rar.legendary{background:var(--accent);color:var(--surface)}
+.mon .seen{font-size:12px;font-weight:700;color:var(--moss);min-height:16px}
+.mon.got{border-color:var(--moss);background:color-mix(in srgb,var(--moss-soft) 60%,var(--surface))}
+.mon.got .ic{background:var(--moss);color:var(--surface)}
+.mon.got .ic svg{animation:pop2 .35s ease}
+@keyframes pop2{0%{transform:scale(.4)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+.mon.legend{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 35%,transparent)}
+.dexnote{font-size:13px;color:var(--muted);margin-top:14px}
+
 /* Reference */
 .jump{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
 .jump button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer}
@@ -403,6 +430,7 @@ button{font:inherit;color:inherit}
       <button class="tab" role="tab" data-tab="prep" aria-selected="false">Prepare</button>
       <button class="tab" role="tab" data-tab="days" aria-selected="false">Days</button>
       <button class="tab" role="tab" data-tab="trail" aria-selected="false">Trail</button>
+      <button class="tab" role="tab" data-tab="dex" aria-selected="false">Wildlife</button>
       <button class="tab" role="tab" data-tab="ref" aria-selected="false">Reference</button>
     </div>
   </nav>
@@ -595,6 +623,25 @@ button{font:inherit;color:inherit}
         <li>The guide’s tip is up to your group.</li>
         <li>Bring the soles from Cusco. There’s nowhere to get cash on the trail.</li></ul></div>
     </div>
+  </section>
+
+  <!-- ===================== WILDLIFE ===================== -->
+  <section class="panel" id="dex" role="tabpanel" hidden>
+    <div class="sec"><h2>Inca Trail field dex</h2><p>Tap a card when you spot it. Your sightings save on this phone and work offline. Ask your guide: they know where to look.</p></div>
+    <div class="dexhead">
+      <div class="big" id="dexCount">0<small> / 0</small></div>
+      <div class="prog"><div class="bar"><span id="dexBar"></span></div></div>
+    </div>
+    <div class="filters" id="dexFilters">
+      <button type="button" data-f="all" aria-pressed="true">All</button>
+      <button type="button" data-f="valley" aria-pressed="false">Day 1 · Valley</button>
+      <button type="button" data-f="high" aria-pressed="false">Day 2 · High passes</button>
+      <button type="button" data-f="cloud" aria-pressed="false">Days 3–4 · Cloud forest</button>
+      <button type="button" data-f="mp" aria-pressed="false">Machu Picchu</button>
+      <button type="button" data-f="todo" aria-pressed="false">Not spotted yet</button>
+    </div>
+    <div class="dex" id="dexGrid"></div>
+    <p class="dexnote">Rarity is a rough guide to your chances on a 4-day trek, not a guarantee. Keep your distance from animals and don’t feed them.</p>
   </section>
 
   <!-- ===================== REFERENCE ===================== -->
@@ -1022,6 +1069,71 @@ button{font:inherit;color:inherit}
     {n:'Day 4 · Nov 20',t:'Sun Gate → Machu Picchu',p:'3:30 AM wake-up, short hike, guided tour, train.',e:30}
   ];
   $('#trekdays').innerHTML=td.map(o=>`<div class="card td"><div class="n">${o.n}</div><h3>${o.t}</h3><p>${o.p}</p><div class="meter" title="Relative effort"><span style="width:${o.e}%"></span></div></div>`).join('');
+
+  /* ---------- Wildlife dex ---------- */
+  const IC={
+    bird:'<svg viewBox="0 0 32 32" fill="currentColor"><path d="M4 18c4 0 7-2 9-5 1-2 3-4 6-4 2 0 4 1 5 3l4 1-4 2c0 5-4 9-10 9-3 0-6-1-8-3l4-1c-3-1-5-1-6-2z"/></svg>',
+    mammal:'<svg viewBox="0 0 32 32" fill="currentColor"><path d="M6 14c0-3 2-5 5-5h9l3-4 1 5c2 1 3 3 3 5v3h-3v7h-3v-6h-9v6H9v-7c-2-1-3-2-3-4z"/></svg>',
+    plant:'<svg viewBox="0 0 32 32" fill="currentColor"><path d="M15 29V17C9 17 5 13 5 6c6 0 10 4 10 9 1-6 5-10 12-10 0 7-4 12-10 12v12z"/></svg>',
+    bug:'<svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 7c1 0 2 1 2 2v14c0 1-1 2-2 2s-2-1-2-2V9c0-1 1-2 2-2zM14 12C9 5 3 7 4 13c1 4 6 4 10 2zm4 0c5-7 11-5 10 1-1 4-6 4-10 2zm-4 6c-4-1-8 0-8 4 1 4 6 3 8-1zm4 0c4-1 8 0 8 4-1 4-6 3-8-1z"/></svg>',
+    reptile:'<svg viewBox="0 0 32 32" fill="currentColor"><path d="M3 20c3-1 5 0 7-2l3-4c2-2 5-2 7 0l4 4 5 1-3 2-4-1-2 2 2 3h-3l-2-3h-4l-2 3H8l2-3c-2 0-4 0-7-2z"/></svg>'
+  };
+  const dex=[
+    ['Rufous-collared sparrow','Pichitanka (Quechua)','bird','common',['valley','high','cloud','mp'],'The little striped-headed sparrow you’ll see everywhere, from Cusco to the ruins.'],
+    ['Chiguanco thrush','Chiwaku','bird','common',['valley','cloud','mp'],'Dark brown thrush with a yellow-orange bill, hopping around campsites.'],
+    ['Torrent duck','Pato de los torrentes','bird','uncommon',['valley'],'Watch the rapids of the Urubamba near KM 82. It swims straight up whitewater.'],
+    ['White-capped dipper','Mirlo acuático','bird','uncommon',['valley','cloud'],'Black-and-white bird bobbing on rocks in fast streams.'],
+    ['Mountain caracara','Alkamari','bird','uncommon',['high'],'Black-and-white falcon with an orange face, on the open slopes near the passes.'],
+    ['American kestrel','Cernícalo','bird','uncommon',['valley','high'],'Small falcon hovering in place over grassy slopes.'],
+    ['Andean condor','Kuntur','bird','legendary',['high'],'Huge glider with white wing patches, riding thermals over ridges. Sacred to the Inca.'],
+    ['Giant hummingbird','Picaflor gigante','bird','uncommon',['valley','high'],'The world’s largest hummingbird, almost swift-sized, around flowering shrubs.'],
+    ['Sword-billed hummingbird','Colibrí pico espada','bird','rare',['cloud'],'Its bill is longer than its body. Look at long tube-shaped flowers.'],
+    ['Green-and-white hummingbird','Colibrí verde y blanco','bird','uncommon',['cloud','mp'],'Found almost only in this region of Peru. Common around Machu Picchu’s flowers.'],
+    ['Tyrian metaltail','Colibrí cola metálica','bird','uncommon',['high','cloud'],'Tiny hummer with a coppery-purple tail, in high scrub.'],
+    ['Inca wren','Cucarachero inca','bird','rare',['cloud','mp'],'Endemic to this area. Listen for duets from bamboo thickets near Machu Picchu.'],
+    ['Blue-and-yellow tanager','Tangara azul y amarilla','bird','common',['valley','cloud','mp'],'Bright yellow belly and blue back, around villages and gardens.'],
+    ['Golden-headed quetzal','Quetzal cabecidorado','bird','rare',['cloud'],'Emerald green with a red belly. Listen for its whistled call in the cloud forest.'],
+    ['Andean cock-of-the-rock','Tunki','bird','legendary',['cloud','mp'],'Peru’s national bird: blazing orange-red male with a crest. More likely near Aguas Calientes.'],
+    ['Andean guan','Pava andina','bird','rare',['cloud'],'Large turkey-like bird in the trees, often heard crashing through branches.'],
+    ['Llama','Llama','mammal','common',['valley','mp'],'They graze on Machu Picchu’s terraces. Don’t get between one and its food.'],
+    ['Mountain viscacha','Wisk’acha','mammal','uncommon',['high','mp'],'Looks like a rabbit with a squirrel tail, sunning on rocks. Check stone walls at the ruins.'],
+    ['White-tailed deer','Taruka / venado','mammal','rare',['high','cloud'],'Shy, usually at dawn or dusk near open slopes.'],
+    ['Andean fox','Atoq','mammal','rare',['high'],'Grey-red fox. Sometimes sniffs around high camps after dark.'],
+    ['Spectacled bear','Ukuku','mammal','legendary',['cloud'],'South America’s only bear, with pale “glasses” on its face. A once-in-a-lifetime sighting.'],
+    ['Puma','Puma','mammal','legendary',['high','cloud'],'Cusco itself was laid out in its shape. You’d be the talk of the trail.'],
+    ['Wiñay Wayna orchid','Wiñay wayna (“forever young”)','plant','uncommon',['cloud'],'Small orange-red orchid that gives the day 3 ruins their name.'],
+    ['Orchids, any other','Orquídeas','plant','common',['cloud','mp'],'The Machu Picchu area has hundreds of species. Look on rocks and tree trunks.'],
+    ['Bromeliads','Achupallas','plant','common',['cloud'],'Spiky rosettes growing on trees and rocks, like wild pineapple tops.'],
+    ['Queuña trees','Polylepis','plant','uncommon',['high'],'Gnarled trees with peeling red papery bark, among the highest-growing trees on Earth.'],
+    ['Tree ferns','Helechos arbóreos','plant','common',['cloud'],'Prehistoric-looking ferns with trunks, lining the trail on day 3.'],
+    ['Ichu grass','Ichu','plant','common',['high'],'The golden bunch grass of the high slopes, used for Inca roof thatch.'],
+    ['Andean butterflies','Mariposas','bug','common',['valley','cloud','mp'],'Dozens of species in the warmer valleys. Count the colors.'],
+    ['Andean lizard','Lagartija','reptile','uncommon',['valley','high'],'Sunning on warm rocks along the stone path. It moves fast when your shadow hits it.']
+  ];
+  let seen=store.get('peru.dex',{}); let filt='all';
+  const rarityOrder={common:0,uncommon:1,rare:2,legendary:3};
+  function drawDex(){
+    const n=Object.keys(seen).length;
+    $('#dexCount').innerHTML=`${n}<small> / ${dex.length}</small>`;
+    $('#dexBar').style.width=(n/dex.length*100)+'%';
+    $('#dexGrid').innerHTML=dex.map((d,i)=>[d,i]).filter(([d,i])=>filt==='all'||(filt==='todo'?!seen[i]:d[4].includes(filt))).map(([d,i])=>{
+      const got=seen[i];
+      return `<button type="button" class="mon${got?' got':''}${d[3]==='legendary'?' legend':''}" data-i="${i}" aria-pressed="${!!got}">
+        <span class="rar ${d[3]}">${d[3]}</span>
+        <span class="ic">${IC[d[2]]}</span>
+        <span class="no">#${String(i+1).padStart(3,'0')}</span>
+        <span class="nm">${d[0]}</span>
+        <span class="loc">${d[1]}</span>
+        <span class="tip">${d[5]}</span>
+        <span class="seen">${got?'✓ Spotted '+got:''}</span>
+      </button>`}).join('')||'<p class="muted">Nothing left in this filter. Nice work.</p>';
+  }
+  $('#dexGrid').addEventListener('click',e=>{const b=e.target.closest('.mon');if(!b)return;const i=+b.dataset.i;
+    if(seen[i]){delete seen[i]}else{const d=new Date();seen[i]=d.toLocaleDateString('en-US',{month:'short',day:'numeric'});const r=dex[i][3];toast(r==='legendary'?`Legendary! ${dex[i][0]} spotted`:`${dex[i][0]} spotted`)}
+    store.set('peru.dex',seen);drawDex()});
+  $('#dexFilters').addEventListener('click',e=>{const b=e.target.closest('[data-f]');if(!b)return;filt=b.dataset.f;
+    $('#dexFilters').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));drawDex()});
+  drawDex();
 
   /* ---------- Phrases ---------- */
   const ph=[['Buenos días','Good morning'],['¿Cuánto cuesta?','How much is it?'],['Agua sin gas, por favor','Still water, please'],['La cuenta, por favor','The check, please'],['¿Dónde está el baño?','Where’s the bathroom?'],['Me siento mareado','I feel dizzy'],['No, gracias','No, thank you'],['Sulpayki','Thank you (Quechua)']];
